@@ -1,0 +1,99 @@
+/* ============================================================
+   ANIMATIONS — Orbs, fade, stagger, shimmer, keyframes
+   ============================================================ */
+
+@layer components {
+
+  /* --- Orb Float Animations (slow, gentle drift) --- */
+  @keyframes orbFloat1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-15px, 10px) scale(1.01); }
+    66% { transform: translate(8px, -5px) scale(0.99); }
+  }
+  @keyframes orbFloat2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(12px, -8px) scale(0.99); }
+    66% { transform: translate(-10px, 5px) scale(1.01); }
+  }
+  @keyframes orbFloat3 {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(10px, 8px); }
+  }
+
+  /* --- Fade In --- */
+  .fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* --- Stagger In --- */
+  .stagger-in > * {
+    animation: fadeIn 0.3s ease-out both;
+  }
+  .stagger-in > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-in > *:nth-child(2) { animation-delay: 50ms; }
+  .stagger-in > *:nth-child(3) { animation-delay: 100ms; }
+  .stagger-in > *:nth-child(4) { animation-delay: 150ms; }
+  .stagger-in > *:nth-child(5) { animation-delay: 200ms; }
+  .stagger-in > *:nth-child(6) { animation-delay: 250ms; }
+  .stagger-in > *:nth-child(7) { animation-delay: 300ms; }
+  .stagger-in > *:nth-child(8) { animation-delay: 350ms; }
+  .stagger-in > *:nth-child(9) { animation-delay: 400ms; }
+  .stagger-in > *:nth-child(10) { animation-delay: 450ms; }
+
+  /* --- One-shot shine sweep --- */
+  @keyframes shimmer-sweep {
+    0%   { transform: translateX(-100%) skewX(-20deg); }
+    100% { transform: translateX(200%) skewX(-20deg); }
+  }
+
+  .shimmer-once {
+    overflow: hidden;
+    position: relative;
+  }
+  .shimmer-once::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+    animation: shimmer-sweep 1.2s ease-out 0.4s forwards;
+    pointer-events: none;
+  }
+
+  /* --- Slow float --- */
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+  }
+  .float-slow {
+    animation: float-slow 4s ease-in-out infinite;
+  }
+
+  /* --- Skeleton Shimmer --- */
+  .skeleton {
+    @apply rounded-xl;
+    background: linear-gradient(90deg, var(--surface2) 0%, var(--surface3) 50%, var(--surface2) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  /* --- Aurora (hero background mesh gradient drift) --- */
+  @keyframes aurora {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(30px, -20px) scale(1.05); }
+    50% { transform: translate(-20px, 15px) scale(0.95); }
+    75% { transform: translate(15px, 25px) scale(1.02); }
+  }
+}

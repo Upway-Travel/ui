@@ -1,0 +1,331 @@
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Upway Design Tokens 2026                                                    */
+/* Direction: Zinc neutrals + cyan-teal (travel/sky) + warm gold accents      */
+/* Dark-first. Premium fintech meets travel intelligence.                      */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
+/* ── Light Mode Defaults (cool zinc) ──────────────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg:       #fafafa;
+  --surface:  #ffffff;
+  --surface2: #f4f4f5;
+  --surface3: #e4e4e7;
+  --elevated: #ffffff;
+
+  /* Borders — slightly more visible for depth */
+  --border:        rgba(0, 0, 0, 0.10);
+  --border2:       rgba(0, 0, 0, 0.14);
+  --border-strong: rgba(0, 0, 0, 0.22);
+
+  /* Gold accent system */
+  --gold:          #c4961a;
+  --gold-light:    #d4a828;
+  --gold-glow:     rgba(196, 150, 26, 0.15);
+  --gold-border:   rgba(196, 150, 26, 0.30);
+  --gold-bg:       rgba(196, 150, 26, 0.08);
+
+  /* Layered shadow system */
+  --shadow-xs:      0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg:      0 8px 24px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.06);
+  --shadow-float:   0 12px 40px rgba(0,0,0,0.12), 0 4px 12px rgba(0,0,0,0.08);
+  --shadow-premium: 0 4px 16px rgba(196,150,26,0.12), 0 1px 3px rgba(0,0,0,0.06);
+
+  /* Text hierarchy */
+  --text:       #18181b;
+  --text-2:     #52525b;
+  --text-3:     #71717a;
+  --text-muted: #a1a1aa;
+
+  /* Primary accent — cyan (sky, travel, intelligence) */
+  --primary:        #0891b2;
+  --primary-hover:  #0e7490;
+  --primary-pressed:#155e75;
+  --primary-muted:  rgba(8, 145, 178, 0.12);
+  --primary-subtle: rgba(8, 145, 178, 0.06);
+
+  /* AI / Chat accent — slightly lighter cyan */
+  --ai-accent:  #06b6d4;
+  --ai-muted:   rgba(6, 182, 212, 0.12);
+  --ai-subtle:  rgba(6, 182, 212, 0.06);
+
+  /* Glow & premium — warm gold for value moments */
+  --accent-glow:    rgba(8, 145, 178, 0.10);
+  --accent-subtle:  rgba(8, 145, 178, 0.06);
+  --accent-border:  rgba(8, 145, 178, 0.20);
+  --premium:        #d97706;
+  --premium-muted:  rgba(217, 119, 6, 0.10);
+
+  /* Legacy compatibility */
+  --amber:         #d97706;
+  --neon-purple:   #06b6d4;
+  --hot:           #ef4444;
+
+  /* Navigation */
+  --nav-active: rgba(8, 145, 178, 0.08);
+  --hover-bg:   rgba(0, 0, 0, 0.04);
+
+  /* Score / value system */
+  --score-excellent:        #059669;
+  --score-excellent-bg:     rgba(5, 150, 105, 0.10);
+  --score-excellent-border: rgba(5, 150, 105, 0.25);
+  --score-good:             #0d9488;
+  --score-good-bg:          rgba(13, 148, 136, 0.10);
+  --score-good-border:      rgba(13, 148, 136, 0.25);
+  --score-fair:             #d97706;
+  --score-fair-bg:          rgba(217, 119, 6, 0.10);
+  --score-fair-border:      rgba(217, 119, 6, 0.25);
+  --score-poor:             #dc2626;
+  --score-poor-bg:          rgba(220, 38, 38, 0.10);
+  --score-poor-border:      rgba(220, 38, 38, 0.25);
+
+  /* Status */
+  --success:    #059669;
+  --warning:    #d97706;
+  --danger:     #dc2626;
+  --danger-bg:  rgba(220, 38, 38, 0.08);
+  --info:       #0891b2;
+  --info-bg:    rgba(8, 145, 178, 0.08);
+
+  /* Cabin */
+  --cabin-first:           #b45309;
+  --cabin-first-border:    rgba(180, 83, 9, 0.30);
+  --cabin-business:        #0d9488;
+  --cabin-business-border: rgba(13, 148, 136, 0.30);
+  --cabin-premium-economy: #0891b2;
+  --cabin-economy:         #78716c;
+
+  /* Loyalty tiers */
+  --tier-platinum:    #64748b;
+  --tier-platinum-bg: rgba(100, 116, 139, 0.10);
+  --tier-gold:        #d97706;
+  --tier-gold-bg:     rgba(217, 119, 6, 0.10);
+  --tier-silver:      #94a3b8;
+  --tier-silver-bg:   rgba(148, 163, 184, 0.10);
+
+  /* Glass / liquid surface system */
+  --glass-bg:           rgba(255, 255, 255, 0.65);
+  --glass-bg-hover:     rgba(255, 255, 255, 0.80);
+  --glass-border:       rgba(0, 0, 0, 0.08);
+  --glass-border-hover: rgba(0, 0, 0, 0.14);
+  --glass-shadow:       0 2px 8px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --glass-shadow-hover: 0 8px 24px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
+  --glass-inner-light:  inset 0 1px 0 rgba(255,255,255,0.8);
+  --glass-pill-bg:      rgba(0, 0, 0, 0.04);
+  --glass-pill-border:  rgba(0, 0, 0, 0.08);
+  --glass-pill-hover:   rgba(0, 0, 0, 0.08);
+
+  /* Ambient orbs (kept for compat, but hidden by default) */
+  --orb1: rgba(6, 182, 212, 0.03);
+  --orb2: rgba(8, 145, 178, 0.02);
+  --orb3: rgba(13, 148, 136, 0.02);
+  --orb4: rgba(14, 165, 233, 0.01);
+
+  /* Aliases (hyphenless compat — used extensively in components) */
+  --text2:     var(--text-2);
+  --text3:     var(--text-3);
+  --muted:     var(--text-muted);
+
+  /* Input / Chat */
+  --chat-input-border: var(--border);
+  --input-bg:          var(--surface);
+  --nav-hover:         var(--hover-bg);
+  --tab-hover:         var(--hover-bg);
+  --text-secondary:    var(--text-3);
+  --cta-gradient:      var(--gradient-cta);
+  --chip-bg:           var(--surface2);
+
+  /* Additional inputs / states */
+  --input-bg-focus:      var(--surface);
+  --amber-hover:         #b45309;
+  --scrollbar-thumb-hover: #a1a1aa;
+  --status-triggered:    var(--warning);
+  --status-triggered-bg: rgba(217, 119, 6, 0.10);
+
+  /* Surface variants */
+  --glass-bg-thin:        #ffffff;
+  --glass-border-thin:    rgba(0, 0, 0, 0.06);
+  --glass-bg-thick:       #ffffff;
+  --glass-border-thick:   rgba(0, 0, 0, 0.10);
+  --glass-frosted-bg:     #ffffff;
+  --glass-frosted-border: rgba(0, 0, 0, 0.08);
+  --glass-bg-hover:       #f9fafb;
+  --glass-hover-border:   rgba(0, 0, 0, 0.12);
+  --glass-accent-bg:      rgba(8, 145, 178, 0.04);
+  --glass-accent-border:  rgba(8, 145, 178, 0.12);
+  --hero-gradient-border: linear-gradient(135deg, rgba(8, 145, 178, 0.2), rgba(6, 182, 212, 0.08));
+
+  /* Scrollbar */
+  --scrollbar-thumb: #d4d4d8;
+  --scrollbar-track: transparent;
+
+  /* Gradients */
+  --gradient-cta:   linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #22d3ee 100%);
+  --score-gradient: linear-gradient(90deg, #059669, #0d9488, #d97706, #dc2626);
+  --hero-bg:        linear-gradient(135deg, #0f172a 0%, #0c1a24 50%, #0f172a 100%);
+}
+
+/* ── Dark Mode (zinc-950 base, dark-first) ────────────────────────────── */
+[data-theme="dark"] {
+  /* Backgrounds — zinc scale */
+  --bg:       #09090b;
+  --surface:  #18181b;
+  --surface2: #27272a;
+  --surface3: #3f3f46;
+  --elevated: #27272a;
+
+  /* Borders — slightly more visible for depth */
+  --border:        rgba(255, 255, 255, 0.08);
+  --border2:       rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.20);
+
+  /* Gold accent system */
+  --gold:          #d4a828;
+  --gold-light:    #e4bc3c;
+  --gold-glow:     rgba(212, 168, 40, 0.20);
+  --gold-border:   rgba(212, 168, 40, 0.35);
+  --gold-bg:       rgba(212, 168, 40, 0.10);
+
+  /* Layered shadow system */
+  --shadow-xs:      0 1px 2px rgba(0,0,0,0.20);
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.15);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.25), 0 2px 4px rgba(0,0,0,0.15);
+  --shadow-lg:      0 8px 24px rgba(0,0,0,0.30), 0 4px 8px rgba(0,0,0,0.20);
+  --shadow-float:   0 12px 40px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.25);
+  --shadow-premium: 0 4px 16px rgba(212,168,40,0.15), 0 1px 3px rgba(0,0,0,0.20);
+
+  /* Text */
+  --text:       #fafafa;
+  --text-2:     #a1a1aa;
+  --text-3:     #71717a;
+  --text-muted: #52525b;
+
+  /* Primary accent — bright cyan on dark */
+  --primary:        #22d3ee;
+  --primary-hover:  #06b6d4;
+  --primary-pressed:#0891b2;
+  --primary-muted:  rgba(34, 211, 238, 0.15);
+  --primary-subtle: rgba(34, 211, 238, 0.07);
+
+  /* AI / Chat accent */
+  --ai-accent:  #22d3ee;
+  --ai-muted:   rgba(34, 211, 238, 0.15);
+  --ai-subtle:  rgba(34, 211, 238, 0.07);
+
+  /* Glow & premium — warm gold */
+  --accent-glow:    rgba(34, 211, 238, 0.15);
+  --accent-subtle:  rgba(34, 211, 238, 0.07);
+  --accent-border:  rgba(34, 211, 238, 0.25);
+  --premium:        #fbbf24;
+  --premium-muted:  rgba(251, 191, 36, 0.15);
+
+  /* Legacy compatibility */
+  --amber:         #fbbf24;
+  --neon-purple:   #22d3ee;
+  --hot:           #fb7185;
+
+  /* Navigation */
+  --nav-active: rgba(34, 211, 238, 0.10);
+  --hover-bg:   rgba(255, 255, 255, 0.06);
+
+  /* Score / value system (brighter on dark) */
+  --score-excellent:        #34d399;
+  --score-excellent-bg:     rgba(52, 211, 153, 0.10);
+  --score-excellent-border: rgba(52, 211, 153, 0.25);
+  --score-good:             #2dd4bf;
+  --score-good-bg:          rgba(45, 212, 191, 0.10);
+  --score-good-border:      rgba(45, 212, 191, 0.25);
+  --score-fair:             #fbbf24;
+  --score-fair-bg:          rgba(251, 191, 36, 0.10);
+  --score-fair-border:      rgba(251, 191, 36, 0.25);
+  --score-poor:             #fb7185;
+  --score-poor-bg:          rgba(251, 113, 133, 0.10);
+  --score-poor-border:      rgba(251, 113, 133, 0.25);
+
+  /* Status */
+  --success:    #34d399;
+  --warning:    #fbbf24;
+  --danger:     #f87171;
+  --danger-bg:  rgba(248, 113, 113, 0.10);
+  --info:       #22d3ee;
+  --info-bg:    rgba(34, 211, 238, 0.08);
+
+  /* Cabin */
+  --cabin-first:           #fbbf24;
+  --cabin-first-border:    rgba(251, 191, 36, 0.35);
+  --cabin-business:        #2dd4bf;
+  --cabin-business-border: rgba(45, 212, 191, 0.35);
+  --cabin-premium-economy: #67e8f9;
+  --cabin-economy:         #71717a;
+
+  /* Loyalty tiers */
+  --tier-platinum:    #cbd5e1;
+  --tier-platinum-bg: rgba(203, 213, 225, 0.08);
+  --tier-gold:        #fbbf24;
+  --tier-gold-bg:     rgba(251, 191, 36, 0.10);
+  --tier-silver:      #94a3b8;
+  --tier-silver-bg:   rgba(148, 163, 184, 0.08);
+
+  /* Dark glass surfaces */
+  --glass-bg:           rgba(255, 255, 255, 0.04);
+  --glass-bg-hover:     rgba(255, 255, 255, 0.07);
+  --glass-border:       rgba(255, 255, 255, 0.06);
+  --glass-border-hover: rgba(255, 255, 255, 0.12);
+  --glass-shadow:       0 2px 8px rgba(0,0,0,0.25), 0 1px 2px rgba(0,0,0,0.15);
+  --glass-shadow-hover: 0 8px 32px rgba(0,0,0,0.35), 0 4px 12px rgba(0,0,0,0.2);
+  --glass-inner-light:  inset 0 1px 0 rgba(255,255,255,0.06);
+  --glass-pill-bg:      rgba(255, 255, 255, 0.04);
+  --glass-pill-border:  rgba(255, 255, 255, 0.06);
+  --glass-pill-hover:   rgba(255, 255, 255, 0.08);
+
+  /* Ambient orbs (kept for compat, subdued) */
+  --orb1: rgba(34, 211, 238, 0.03);
+  --orb2: rgba(6, 182, 212, 0.02);
+  --orb3: rgba(45, 212, 191, 0.02);
+  --orb4: rgba(14, 165, 233, 0.01);
+
+  /* Aliases (hyphenless compat) */
+  --text2:     var(--text-2);
+  --text3:     var(--text-3);
+  --muted:     var(--text-muted);
+
+  /* Input / Chat */
+  --chat-input-border: var(--border);
+  --input-bg:          var(--surface);
+  --nav-hover:         var(--hover-bg);
+  --tab-hover:         var(--hover-bg);
+  --text-secondary:    var(--text-3);
+  --cta-gradient:      var(--gradient-cta);
+  --chip-bg:           var(--surface2);
+
+  /* Additional inputs / states */
+  --input-bg-focus:      var(--surface2);
+  --amber-hover:         #d97706;
+  --scrollbar-thumb-hover: #52525b;
+  --status-triggered:    var(--warning);
+  --status-triggered-bg: rgba(251, 191, 36, 0.10);
+
+  /* Surface variants */
+  --glass-bg-thin:        #18181b;
+  --glass-border-thin:    rgba(255, 255, 255, 0.04);
+  --glass-bg-thick:       #1f1f23;
+  --glass-border-thick:   rgba(255, 255, 255, 0.08);
+  --glass-frosted-bg:     #18181b;
+  --glass-frosted-border: rgba(255, 255, 255, 0.06);
+  --glass-bg-hover:       #27272a;
+  --glass-hover-border:   rgba(255, 255, 255, 0.10);
+  --glass-accent-bg:      rgba(34, 211, 238, 0.05);
+  --glass-accent-border:  rgba(34, 211, 238, 0.15);
+  --hero-gradient-border: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(6, 182, 212, 0.08));
+
+  /* Scrollbar */
+  --scrollbar-thumb: #3f3f46;
+  --scrollbar-track: transparent;
+
+  /* Gradients */
+  --gradient-cta:   linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #22d3ee 100%);
+  --score-gradient: linear-gradient(90deg, #34d399, #2dd4bf, #fbbf24, #fb7185);
+  --hero-bg:        linear-gradient(135deg, #0a0f1a 0%, #0c1a24 50%, #0a0f1a 100%);
+}
