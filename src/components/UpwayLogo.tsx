@@ -3,7 +3,7 @@
  *
  * The mark: a paper plane tilted upward at ~45°, with a trajectory trail
  * behind it that doubles as a rising chart line. Travel + optimization in one.
- * The plane is geometric/minimal, filled with a cyan gradient.
+ * The plane is geometric/minimal, filled with a Forest-to-Sage gradient.
  */
 
 interface LogoProps {
@@ -26,8 +26,8 @@ export function UpwayMark({ size = 20, className = '' }: LogoProps) {
     >
       <defs>
         <linearGradient id={id} x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#0891b2" />
-          <stop offset="100%" stopColor="#67e8f9" />
+          <stop offset="0%" stopColor="#1a4d32" />
+          <stop offset="100%" stopColor="#8fbfa0" />
         </linearGradient>
       </defs>
       {/* Ascending trail — curved path from bottom-left */}
@@ -67,7 +67,7 @@ export default function UpwayLogo({ size = 36, className = '' }: LogoProps) {
       style={{
         width: size,
         height: size,
-        boxShadow: 'var(--glass-shadow), var(--glass-inner-light), 0 0 12px rgba(8,145,178,0.08)',
+        boxShadow: 'var(--glass-shadow), var(--glass-inner-light), 0 0 12px rgba(26,77,50,0.08)',
       }}
     >
       <UpwayMark size={size * 0.65} />
