@@ -54,20 +54,7 @@ export function UpwayMark({ size = 20, className = '' }: LogoProps) {
   );
 }
 
-/** Badge version — glass container with brand mark */
+/** Logo — just the mark, clean, no container chrome */
 export default function UpwayLogo({ size = 36, className = '' }: LogoProps) {
-  return (
-    <div
-      className={`rounded-xl flex items-center justify-center shrink-0 backdrop-blur-md
-        bg-[var(--glass-bg)] border border-[var(--glass-border)]
-        ${className}`}
-      style={{
-        width: size,
-        height: size,
-        boxShadow: 'var(--glass-shadow), var(--glass-inner-light), 0 0 12px rgba(26,77,50,0.08)',
-      }}
-    >
-      <UpwayMark size={size * 0.65} />
-    </div>
-  );
+  return <UpwayMark size={size} className={className} />;
 }
