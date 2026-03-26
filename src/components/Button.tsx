@@ -14,7 +14,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantClasses: Record<ButtonVariant, string> = {
   primary:
-    'bg-zinc-900 text-white shadow-depth-2 hover:bg-zinc-800 hover:shadow-depth-3 hover:-translate-y-[0.5px] dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-100',
+    'bg-[#1a4d32] text-white shadow-depth-2 hover:bg-[#163f29] hover:shadow-depth-3 hover:-translate-y-[0.5px] dark:bg-[#8fbfa0] dark:text-[#0d2e1d] dark:hover:bg-[#a3ccb2]',
   secondary:
     'bg-transparent text-[var(--text)] border border-[var(--border)] hover:bg-[var(--hover-bg)] hover:border-[var(--text2)]',
   ghost:
@@ -22,7 +22,7 @@ const variantClasses: Record<ButtonVariant, string> = {
   danger:
     'bg-red-600 text-white hover:bg-red-700',
   premium:
-    'bg-amber-500 text-zinc-900 font-semibold hover:bg-amber-400 hover:shadow-glow-gold hover:-translate-y-[0.5px]',
+    'bg-[#e8d44d] text-[#0d2e1d] font-semibold hover:bg-[#d4c045] hover:-translate-y-[0.5px]',
 };
 
 const sizeClasses: Record<ButtonSize, string> = {
@@ -47,6 +47,7 @@ export default function Button({
     <button
       className={`
         inline-flex items-center justify-center font-medium transition-all duration-150
+        focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#8fbfa0]
         ${variantClasses[variant]}
         ${sizeClasses[size]}
         ${fullWidth ? 'w-full' : ''}
