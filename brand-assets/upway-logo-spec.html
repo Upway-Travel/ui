@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Upway Travel — Logo Spec</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Quicksand:wght@600;700&family=Fredoka:wght@600;700&family=Nunito:wght@800;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    background: #f0f0f0;
+    font-family: 'Nunito', sans-serif;
+    padding: 40px;
+    gap: 60px;
+  }
+
+  .spec-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #999;
+    font-weight: 700;
+  }
+
+  /* ─── VARIANT CARD ─── */
+  .card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+  }
+  .card-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #aaa;
+    font-weight: 800;
+  }
+
+  /* ─── LOGO CONTAINERS ─── */
+  .logo-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .logo-container.primary {
+    width: 800px;
+    height: 450px;
+    background: linear-gradient(135deg, #00E0FF 0%, #00C4E8 50%, #00B8DC 100%);
+  }
+  .logo-container.dark {
+    width: 800px;
+    height: 450px;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  }
+  .logo-container.white {
+    width: 800px;
+    height: 450px;
+    background: #ffffff;
+    border: 2px solid #eee;
+  }
+  .logo-container.icon-only {
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #00E0FF 0%, #00C4E8 50%, #00B8DC 100%);
+    border-radius: 60px;
+  }
+
+  /* ─── THE WORDMARK ─── */
+  .wordmark-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    transform: rotate(-3deg);
+  }
+
+  .upway-text {
+    position: relative;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 130px;
+    line-height: 1;
+    letter-spacing: 4px;
+    /* Cream fill */
+    color: #FCEBD4;
+    /* Orange outline via paint-order trick */
+    -webkit-text-stroke: 0px;
+    paint-order: stroke fill;
+    text-shadow: none;
+    transform: skewX(-6deg);
+  }
+
+  /* SVG filter approach for clean outline */
+  .upway-wrap {
+    position: relative;
+    display: inline-block;
+  }
+  .upway-wrap .outline-layer {
+    position: absolute;
+    top: 0; left: 0;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 130px;
+    line-height: 1;
+    letter-spacing: 4px;
+    color: #E8962E;
+    -webkit-text-stroke: 10px #E8962E;
+    paint-order: stroke fill;
+    transform: skewX(-6deg);
+    z-index: 1;
+  }
+  .upway-wrap .fill-layer {
+    position: relative;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 130px;
+    line-height: 1;
+    letter-spacing: 4px;
+    color: #FCEBD4;
+    transform: skewX(-6deg);
+    z-index: 2;
+  }
+  /* Drop shadow on the outline */
+  .upway-wrap .shadow-layer {
+    position: absolute;
+    top: 5px; left: 5px;
+    font-family: 'Luckiest Guy', cursive;
+    font-size: 130px;
+    line-height: 1;
+    letter-spacing: 4px;
+    color: transparent;
+    -webkit-text-stroke: 12px rgba(0,0,0,0.12);
+    paint-order: stroke fill;
+    transform: skewX(-6deg);
+    z-index: 0;
+  }
+
+  .travel-text {
+    font-family: 'Fredoka', sans-serif;
+    font-weight: 600;
+    font-size: 38px;
+    letter-spacing: 22px;
+    text-transform: uppercase;
+    color: #E8962E;
+    transform: skewX(-6deg);
+    margin-top: 4px;
+    text-indent: 22px; /* balance letter-spacing on both sides */
+  }
+
+  /* Dark variant overrides */
+  .dark .upway-wrap .outline-layer { color: #D4820F; -webkit-text-stroke-color: #D4820F; }
+  .dark .upway-wrap .fill-layer { color: #FFF5E6; }
+  .dark .travel-text { color: #D4820F; }
+
+  /* White bg variant */
+  .white .upway-wrap .outline-layer { color: #E8962E; -webkit-text-stroke-color: #E8962E; }
+  .white .upway-wrap .fill-layer { color: #00D4F5; }
+  .white .upway-wrap .shadow-layer { -webkit-text-stroke-color: rgba(0,0,0,0.06); }
+  .white .travel-text { color: #E8962E; }
+
+  /* Icon only — smaller text, no TRAVEL */
+  .icon-only .upway-wrap .outline-layer,
+  .icon-only .upway-wrap .fill-layer,
+  .icon-only .upway-wrap .shadow-layer {
+    font-size: 80px;
+  }
+  .icon-only .upway-wrap .outline-layer { -webkit-text-stroke-width: 7px; }
+  .icon-only .upway-wrap .shadow-layer { -webkit-text-stroke-width: 8px; }
+
+  /* ─── COLOR SWATCHES ─── */
+  .swatches {
+    display: flex;
+    gap: 24px;
+    margin-top: 10px;
+  }
+  .swatch {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .swatch-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 3px solid #eee;
+  }
+  .swatch-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    font-weight: 700;
+  }
+  .swatch-hex {
+    font-size: 12px;
+    color: #555;
+    font-weight: 800;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  /* ─── GRID ROW ─── */
+  .grid-row {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+  }
+  .grid-row .card { flex: 1; }
+
+  /* ─── SPACING / CLEARSPACE DIAGRAM ─── */
+  .clearspace-container {
+    position: relative;
+    width: 500px;
+    height: 280px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .clearspace-container .upway-wrap .outline-layer,
+  .clearspace-container .upway-wrap .fill-layer,
+  .clearspace-container .upway-wrap .shadow-layer {
+    font-size: 80px;
+  }
+  .clearspace-container .upway-wrap .outline-layer { -webkit-text-stroke-width: 7px; }
+  .clearspace-container .upway-wrap .shadow-layer { -webkit-text-stroke-width: 8px; }
+  .clearspace-border {
+    position: absolute;
+    border: 2px dashed #E8962E;
+    border-radius: 12px;
+    top: 30px; right: 60px; bottom: 30px; left: 60px;
+    opacity: 0.4;
+  }
+  .clearspace-label {
+    position: absolute;
+    font-size: 10px;
+    color: #E8962E;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .clearspace-label.top { top: 10px; left: 50%; transform: translateX(-50%); }
+  .clearspace-label.bottom { bottom: 10px; left: 50%; transform: translateX(-50%); }
+  .clearspace-label.left { left: 20px; top: 50%; transform: translateY(-50%) rotate(-90deg); }
+  .clearspace-label.right { right: 20px; top: 50%; transform: translateY(-50%) rotate(90deg); }
+
+  /* ─── TYPOGRAPHY SPEC ─── */
+  .type-spec {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .type-row {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .type-role {
+    width: 120px;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #aaa;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .type-sample {
+    flex: 1;
+    font-size: 28px;
+    color: #333;
+  }
+  .type-detail {
+    font-size: 11px;
+    color: #999;
+    font-weight: 700;
+    text-align: right;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="spec-title">Upway Travel — Brand Identity Spec Sheet</div>
+
+<!-- ═══ PRIMARY LOCKUP ═══ -->
+<div class="card">
+  <div class="card-label">Primary Lockup — Cyan Background</div>
+  <div class="logo-container primary">
+    <div class="wordmark-group">
+      <div class="upway-wrap">
+        <span class="shadow-layer">UPWAY</span>
+        <span class="outline-layer">UPWAY</span>
+        <span class="fill-layer">UPWAY</span>
+      </div>
+      <div class="travel-text">Travel</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ WORDMARK ONLY ═══ -->
+<div class="card">
+  <div class="card-label">Wordmark Only — No Tagline</div>
+  <div class="logo-container primary">
+    <div class="wordmark-group">
+      <div class="upway-wrap">
+        <span class="shadow-layer">UPWAY</span>
+        <span class="outline-layer">UPWAY</span>
+        <span class="fill-layer">UPWAY</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DARK + WHITE VARIANTS ═══ -->
+<div class="grid-row">
+  <div class="card">
+    <div class="card-label">Dark Variant</div>
+    <div class="logo-container dark" style="width:100%; height:300px;">
+      <div class="wordmark-group">
+        <div class="upway-wrap">
+          <span class="shadow-layer">UPWAY</span>
+          <span class="outline-layer">UPWAY</span>
+          <span class="fill-layer">UPWAY</span>
+        </div>
+        <div class="travel-text">Travel</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-label">Light Variant</div>
+    <div class="logo-container white" style="width:100%; height:300px;">
+      <div class="wordmark-group">
+        <div class="upway-wrap">
+          <span class="shadow-layer">UPWAY</span>
+          <span class="outline-layer">UPWAY</span>
+          <span class="fill-layer">UPWAY</span>
+        </div>
+        <div class="travel-text">Travel</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ APP ICON ═══ -->
+<div class="card">
+  <div class="card-label">App Icon</div>
+  <div style="display: flex; gap: 40px; align-items: center;">
+    <div class="logo-container icon-only">
+      <div class="wordmark-group" style="transform: rotate(-3deg);">
+        <div class="upway-wrap">
+          <span class="shadow-layer">UPWAY</span>
+          <span class="outline-layer">UPWAY</span>
+          <span class="fill-layer">UPWAY</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo-container icon-only" style="width:200px; height:200px; border-radius: 44px;">
+      <div class="wordmark-group" style="transform: rotate(-3deg);">
+        <div class="upway-wrap">
+          <span class="shadow-layer" style="font-size:52px;">UPWAY</span>
+          <span class="outline-layer" style="font-size:52px; -webkit-text-stroke-width:5px;">UPWAY</span>
+          <span class="fill-layer" style="font-size:52px;">UPWAY</span>
+        </div>
+      </div>
+    </div>
+    <div class="logo-container icon-only" style="width:120px; height:120px; border-radius: 28px;">
+      <div class="wordmark-group" style="transform: rotate(-3deg);">
+        <div class="upway-wrap">
+          <span class="shadow-layer" style="font-size:30px;">UPWAY</span>
+          <span class="outline-layer" style="font-size:30px; -webkit-text-stroke-width:3px;">UPWAY</span>
+          <span class="fill-layer" style="font-size:30px;">UPWAY</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CLEARSPACE ═══ -->
+<div class="card">
+  <div class="card-label">Minimum Clear Space</div>
+  <div class="clearspace-container">
+    <div class="clearspace-border"></div>
+    <div class="clearspace-label top">1x cap height</div>
+    <div class="clearspace-label bottom">1x cap height</div>
+    <div class="clearspace-label left">1.5x</div>
+    <div class="clearspace-label right">1.5x</div>
+    <div class="wordmark-group" style="transform: rotate(-3deg);">
+      <div class="upway-wrap">
+        <span class="shadow-layer" style="font-size:64px;">UPWAY</span>
+        <span class="outline-layer" style="font-size:64px; -webkit-text-stroke-width:5px;">UPWAY</span>
+        <span class="fill-layer" style="font-size:64px;">UPWAY</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ COLOR PALETTE ═══ -->
+<div class="card">
+  <div class="card-label">Brand Color Palette</div>
+  <div class="swatches">
+    <div class="swatch">
+      <div class="swatch-circle" style="background: #00D4F5;"></div>
+      <div class="swatch-label">Cyan</div>
+      <div class="swatch-hex">#00D4F5</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background: #E8962E;"></div>
+      <div class="swatch-label">Orange</div>
+      <div class="swatch-hex">#E8962E</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background: #FCEBD4;"></div>
+      <div class="swatch-label">Cream</div>
+      <div class="swatch-hex">#FCEBD4</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background: #1a1a2e;"></div>
+      <div class="swatch-label">Dark</div>
+      <div class="swatch-hex">#1A1A2E</div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-circle" style="background: #ffffff;"></div>
+      <div class="swatch-label">White</div>
+      <div class="swatch-hex">#FFFFFF</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TYPOGRAPHY ═══ -->
+<div class="card">
+  <div class="card-label">Typography</div>
+  <div class="type-spec">
+    <div class="type-row">
+      <div class="type-role">Wordmark</div>
+      <div class="type-sample" style="font-family: 'Luckiest Guy', cursive; color: #E8962E; transform: skewX(-6deg);">UPWAY</div>
+      <div class="type-detail">Luckiest Guy / Regular<br>Skew -6deg / Stroke 10px</div>
+    </div>
+    <div class="type-row">
+      <div class="type-role">Tagline</div>
+      <div class="type-sample" style="font-family: 'Fredoka', sans-serif; font-weight: 600; color: #E8962E; letter-spacing: 8px; text-transform: uppercase; font-size: 22px; transform: skewX(-6deg);">Travel</div>
+      <div class="type-detail">Fredoka / SemiBold 600<br>Tracking +22px / Uppercase</div>
+    </div>
+    <div class="type-row">
+      <div class="type-role">UI Body</div>
+      <div class="type-sample" style="font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 20px;">The smart way to use your points.</div>
+      <div class="type-detail">Nunito / ExtraBold 800<br>Recommended for UI text</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<div style="margin-top: 20px; margin-bottom: 40px; text-align: center;">
+  <div style="font-size: 10px; text-transform: uppercase; letter-spacing: 3px; color: #ccc; font-weight: 700;">
+    Upway Travel &copy; 2026 — Brand Spec v1.0 — Designed by Harry
+  </div>
+</div>
+
+</body>
+</html>
