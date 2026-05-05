@@ -1,0 +1,24 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci
+      - run: npm run build --if-present
+      - name: Block build artifacts in tree
+        run: |
+          BAD=$(git ls-files | grep -E '(^|/)(dist|build|node_modules|\.next|out|coverage|\.turbo)(/|$)' || true)
+          if [ -n "$BAD" ]; then
+            echo "::error::Build artifacts committed:"
+            echo "$BAD"
+            exit 1
+          fi
