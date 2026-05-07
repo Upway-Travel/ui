@@ -1,1 +1,7 @@
-* @kylejfitzsimmons
+# Default — Kyle owns components
+*                       @kylejfitzsimmons
+
+# Both review brand/style changes
+src/styles/**           @MelonMan00 @kylejfitzsimmons
+brand-assets/**         @MelonMan00 @kylejfitzsimmons
+tailwind-preset.js      @MelonMan00 @kylejfitzsimmons
