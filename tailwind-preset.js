@@ -12,12 +12,31 @@ export const upwayPreset = {
   theme: {
     extend: {
       colors: {
+        // ── Semantic brand tokens — CSS variables driven by data-upway-surface ──
+        // Each consumer sets data-upway-surface="public" (cream/forest/volt) or
+        // data-upway-surface="lab" (zinc/cyan/gold) on a root element.
+        // See @upway/ui src/styles/tokens.css for the contract.
         brand: {
-          DEFAULT: '#8fbfa0',
-          sage: '#8fbfa0',
-          forest: '#1a4d32',
-          sun: '#e8d44d',
-          coral: '#e8735a',
+          DEFAULT: 'var(--color-brand)',
+          deep:    'var(--color-brand-deep)',
+          // Public mode palette primitives (use sparingly — prefer semantic tokens)
+          cream:   'var(--upway-cream)',
+          bone:    'var(--upway-bone)',
+          ink:     'var(--upway-ink)',
+          forest:  'var(--upway-forest)',
+          volt:    'var(--upway-volt)',
+          // Legacy aliases kept for existing consumers — DO NOT USE for new surfaces
+          sage:    '#8fbfa0',
+          sun:     '#e8d44d',
+          coral:   '#e8735a',
+        },
+        surface: {
+          DEFAULT: 'var(--color-surface)',
+          bg:      'var(--color-bg)',
+        },
+        accent: {
+          DEFAULT: 'var(--color-accent)',  /* event-only — Volt rule */
+          value:   'var(--color-value)',
         },
         gold: {
           DEFAULT: '#c4961a',
@@ -26,10 +45,11 @@ export const upwayPreset = {
         },
       },
       fontFamily: {
-        sans: ['Geist Sans', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
-        display: ['Satoshi', 'Geist Sans', 'system-ui', 'sans-serif'],
-        mono: ['Geist Mono', 'JetBrains Mono', 'monospace'],
-        serif: ['Playfair Display', 'Georgia', 'serif'],
+        sans: ['var(--font-ui)', 'Geist Sans', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
+        display: ['var(--font-display)', 'Fraunces', 'Playfair Display', 'Georgia', 'serif'],
+        mono: ['var(--font-mono)', 'Söhne Mono', 'Geist Mono', 'JetBrains Mono', 'ui-monospace', 'monospace'],
+        // Legacy aliases — kept for existing consumers
+        serif: ['var(--font-display)', 'Fraunces', 'Playfair Display', 'Georgia', 'serif'],
       },
       boxShadow: {
         'depth-1': '0 1px 2px rgba(0,0,0,0.05)',

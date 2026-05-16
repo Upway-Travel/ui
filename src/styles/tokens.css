@@ -1,10 +1,74 @@
 /* ─────────────────────────────────────────────────────────────────────────── */
 /* Upway Design Tokens 2026                                                    */
-/* Direction: Zinc neutrals + cyan-teal (travel/sky) + warm gold accents      */
-/* Dark-first. Premium fintech meets travel intelligence.                      */
+/*                                                                             */
+/* Two-scope contract (locked 2026-05-15):                                     */
+/*   • public — editorial / aviation-grade. Landing, blog, deck,               */
+/*     app.upway.travel. Cream + Forest + Volt (event-only) + Ink.             */
+/*   • lab    — operational cockpit. lab.upway.travel + internal diagnostics.  */
+/*     Zinc + Cyan + Gold (current dark-first system).                         */
+/*                                                                             */
+/* Opt in via [data-upway-surface="public"] or [data-upway-surface="lab"].     */
+/* `data-app-mode="lab"` also activates the lab scope automatically.           */
+/*                                                                             */
+/* Volt rule: ONE accent moment per viewport. Money/CTA/value only.            */
+/* Never decorative, never as a fill, never on borders.                        */
 /* ─────────────────────────────────────────────────────────────────────────── */
 
-/* ── Light Mode Defaults (cool zinc) ──────────────────────────────────── */
+/* ── Primitive palette tokens (the colors themselves) ─────────────────── */
+:root {
+  /* Public — editorial / aviation-grade */
+  --upway-cream:        #FAF9F5;
+  --upway-bone:         #F4F1EA;
+  --upway-ink:          #0A0E14;
+  --upway-forest:       #1A4D32;
+  --upway-forest-deep:  #0D2E1D;
+  --upway-sage:         #8FBFA0;
+  --upway-volt:         #C6FF3D;
+  --upway-gold-warm:    #C4961A;
+
+  /* Lab — operational cockpit (mirrors existing zinc/cyan system) */
+  --upway-zinc-50:      #fafafa;
+  --upway-zinc-100:     #f4f4f5;
+  --upway-zinc-900:     #18181b;
+  --upway-zinc-950:     #09090b;
+  --upway-cyan-400:     #22d3ee;
+  --upway-cyan-600:     #0891b2;
+  --upway-gold-400:     #d4a828;
+}
+
+/* ── Semantic scopes — consumers reference these, not primitives ──────── */
+:root,
+[data-upway-surface="public"] {
+  --color-bg:       var(--upway-cream);
+  --color-surface:  var(--upway-bone);
+  --color-text:     var(--upway-ink);
+  --color-brand:    var(--upway-forest);
+  --color-brand-deep: var(--upway-forest-deep);
+  --color-accent:   var(--upway-volt);  /* event-only — see Volt rule above */
+  --color-value:    var(--upway-gold-warm);
+  --font-display:   'Fraunces', 'Playfair Display', Georgia, serif;
+  --font-ui:        'Geist Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono:      'Söhne Mono', 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+}
+
+[data-upway-surface="lab"],
+[data-app-mode="lab"] {
+  --color-bg:       var(--upway-zinc-950);
+  --color-surface:  var(--upway-zinc-900);
+  --color-text:     var(--upway-zinc-50);
+  --color-brand:    var(--upway-cyan-400);
+  --color-brand-deep: var(--upway-cyan-600);
+  --color-accent:   var(--upway-gold-400);
+  --color-value:    var(--upway-gold-400);
+  /* Fonts are shared across scopes; lab inherits public font stack. */
+}
+
+/* ── Legacy tokens below — preserved for existing consumers ───────────── */
+/* These remain unchanged to avoid breaking the current app/landing/blog.   */
+/* New surfaces should reference the semantic --color-* tokens above and    */
+/* set data-upway-surface on a root element.                                */
+
+/* ── Light Mode Defaults (cool zinc — legacy) ─────────────────────────── */
 :root {
   /* Backgrounds */
   --bg:       #fafafa;
