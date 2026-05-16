@@ -28,6 +28,18 @@ export { default as RouteEconomicsRow } from './components/RouteEconomicsRow';
 export type { RouteEconomicsRowProps } from './components/RouteEconomicsRow';
 export { default as AuditTrailFooter } from './components/AuditTrailFooter';
 export type { AuditTrailFooterProps } from './components/AuditTrailFooter';
+export { default as ActionChip } from './components/ActionChip';
+export type { ActionChipProps, ActionChipVariant, ActionChipMode } from './components/ActionChip';
+export { default as DataCallout } from './components/DataCallout';
+export type { DataCalloutProps } from './components/DataCallout';
+export { default as RouteCard } from './components/RouteCard';
+export type { RouteCardProps } from './components/RouteCard';
+export { default as AdviserSnippet } from './components/AdviserSnippet';
+export type { AdviserSnippetProps } from './components/AdviserSnippet';
+export { default as DossierZone } from './components/DossierZone';
+export type { DossierZoneProps } from './components/DossierZone';
+export { default as AskUpway } from './components/AskUpway';
+export type { AskUpwayProps } from './components/AskUpway';
 
 // Utilities
 export { cn } from './lib/utils';
