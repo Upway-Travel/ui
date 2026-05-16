@@ -10,6 +10,12 @@ export { default as Skeleton, SkeletonText, SkeletonCard } from './components/Sk
 export { default as SlidePanel, SlidePanelHeader } from './components/SlidePanel';
 export { default as Toast, useToastStore, toast } from './components/Toast';
 export { default as UpwayLogo, UpwayMark } from './components/UpwayLogo';
+export { default as UpwayWordmark } from './components/UpwayWordmark';
+export type { UpwayWordmarkProps, UpwayWordmarkVariant } from './components/UpwayWordmark';
+export { default as FlapDisplay } from './components/FlapDisplay';
+export type { FlapDisplayProps } from './components/FlapDisplay';
+export { default as DepartureTicker } from './components/DepartureTicker';
+export type { DepartureTickerProps, DepartureColumn } from './components/DepartureTicker';
 export { FloatingNav } from './components/FloatingNav';
 export type { FloatingNavProps, NavLink, FloatingNavVariant } from './components/FloatingNav';
 
