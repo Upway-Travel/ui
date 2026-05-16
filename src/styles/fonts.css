@@ -1,3 +1,15 @@
+/* ─────────────────────────────────────────────────────────────────────────── */
+/* Upway Fonts — locked 2026-05-15                                             */
+/*                                                                             */
+/*   Display : Fraunces  (warm editorial serif — Google Fonts)                 */
+/*   UI/Body : Geist Sans (modern grotesque — bundled below)                   */
+/*   Mono    : Söhne Mono (paid licensing pending) → Geist Mono fallback       */
+/*                                                                             */
+/* Consumers should pull Fraunces from Google Fonts in their <head>, and       */
+/* reference font families via the --font-display / --font-ui / --font-mono   */
+/* CSS variables defined in tokens.css.                                        */
+/* ─────────────────────────────────────────────────────────────────────────── */
+
 @font-face {
   font-family: 'Geist Sans';
   src: url('/fonts/GeistVF.woff2') format('woff2');
@@ -13,3 +25,14 @@
   font-display: swap;
   font-style: normal;
 }
+
+/*
+ * Fraunces is loaded by each consumer via Google Fonts in their <head>:
+ *   <link rel="preconnect" href="https://fonts.googleapis.com">
+ *   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+ *   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&display=swap" rel="stylesheet">
+ *
+ * Söhne Mono is paid (Klim Type Foundry). When licensing is resolved, drop
+ * the woff2 into /fonts/ and add an @font-face block here. Until then,
+ * Geist Mono is the fallback (already declared above).
+ */

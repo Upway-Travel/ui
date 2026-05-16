@@ -18,14 +18,35 @@ The shared design system + component library. Used by `app`, `landing`, `blog`. 
 - **Components:** Button, Card, SlidePanel, FloatingNav, ScoreRing, Badge, Toast, AnimatedCounter, UpwayLogo
 - **Tailwind preset:** `tailwind-preset.js` — every consumer extends this
 
-## Brand (2026-05 lock)
+## Brand — two-scope contract (2026-05-15 lock)
 
-- **Primary (Ink):** `#0A0E14` — backgrounds, app shell
-- **Secondary (Bone):** `#F4F1EA` — light-mode surfaces, marketing
-- **Accent (Volt):** `#C6FF3D` — money / CTA / value ONLY. Never decorative.
-- **Display:** GT Maru
-- **Body:** Satoshi
-- **Mono:** Söhne Mono (numerals, prices)
+Two scopes, opted into via `data-upway-surface` (or `data-app-mode="lab"`):
+
+**`public` — editorial / aviation-grade.** Landing, blog, pitch-deck, app.upway.travel.
+- **Cream** `#FAF9F5` — paper foundation
+- **Bone** `#F4F1EA` — secondary surfaces
+- **Ink** `#0A0E14` — body text
+- **Forest** `#1A4D32` / **Forest-deep** `#0D2E1D` — structural depth, headings
+- **Sage** `#8FBFA0` — soft accents
+- **Volt** `#C6FF3D` — **event-only.** One accent moment per viewport. Money / CTA / value reveal. Never decorative, never as fill, never on borders.
+- **Gold-warm** `#C4961A` — valuation moments only
+
+**`lab` — operational cockpit.** lab.upway.travel + internal diagnostics. Keeps the existing zinc + cyan + gold cockpit system. Cyan/teal belongs to lab/internal data contexts — NOT public brand surfaces.
+
+**Typography (both scopes):**
+- **Display:** Fraunces (Google Fonts, opsz 9..144, wght 300..900)
+- **UI / Body:** Geist Sans (bundled in `/fonts/`)
+- **Mono:** Söhne Mono (Klim Type Foundry — paid, licensing pending) → Geist Mono fallback
+
+Consumers reference semantic tokens (`--color-bg`, `--color-brand`, `--color-accent`, `--font-display`, `--font-ui`, `--font-mono`), NOT primitives. The `tailwind-preset.js` exposes Tailwind classes that map to these CSS variables.
+
+**Locked rules:**
+- Public surfaces use `data-upway-surface="public"`; lab surfaces use `data-app-mode="lab"` or `data-upway-surface="lab"`.
+- Cyan/teal NEVER appears in public brand surfaces.
+- Volt rule: max one accent per viewport.
+- Legacy palettes (sage/forest/sun/coral; cyan-only) stay for existing consumers as Tailwind aliases — do NOT use for new public surfaces.
+
+See `CHANGELOG.md [0.3.0]` and `src/styles/tokens.css` header for details.
 
 ## Brand assets
 

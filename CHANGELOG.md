@@ -6,6 +6,42 @@ The format is loosely based on [Keep a Changelog](https://keepachangelog.com/),
 and this project follows the rule: **breaking changes bump the minor version
 until 1.0**, and consumers must explicitly bump their pinned commit SHA.
 
+## [0.3.0] — 2026-05-15
+
+### Public / lab two-scope token contract — non-breaking
+
+Resolves the 4-palette conflict (zinc/cyan/gold in `tokens.css` vs Ink/Bone/Volt in docs vs sage/forest/sun/coral in `tailwind-preset.js` vs cream/forest/gold in landing's local tokens) by introducing **two explicit semantic scopes** that consumers opt into via data attributes.
+
+**No tokens removed.** All existing CSS variables (`--bg`, `--text`, `--primary`, etc.) remain unchanged so current consumers continue to build. Only additive changes.
+
+**Added — primitive palette tokens:**
+- `--upway-cream` `#FAF9F5`, `--upway-bone` `#F4F1EA`, `--upway-ink` `#0A0E14`
+- `--upway-forest` `#1A4D32`, `--upway-forest-deep` `#0D2E1D`, `--upway-sage` `#8FBFA0`
+- `--upway-volt` `#C6FF3D` (event-only — one accent per viewport)
+- `--upway-gold-warm` `#C4961A`
+- `--upway-zinc-50/100/900/950`, `--upway-cyan-400/600`, `--upway-gold-400` (lab primitives)
+
+**Added — semantic scopes** in `src/styles/tokens.css`:
+- `:root, [data-upway-surface="public"]` → cream/forest/Volt/Ink + Fraunces/Geist/Söhne Mono
+- `[data-upway-surface="lab"], [data-app-mode="lab"]` → zinc/cyan/gold (cockpit)
+
+**Added — semantic CSS variables for new consumers:**
+- `--color-bg`, `--color-surface`, `--color-text`, `--color-brand`, `--color-brand-deep`, `--color-accent`, `--color-value`
+- `--font-display` (Fraunces), `--font-ui` (Geist Sans), `--font-mono` (Söhne Mono → Geist Mono fallback)
+
+**Tailwind preset updated** to map `brand`, `surface`, `accent`, font families to the new CSS variables. Legacy classes (`brand.sage`, `brand.sun`, `brand.coral`) preserved as static aliases — do NOT use for new public surfaces.
+
+**Docs aligned** — `CLAUDE.md` now describes the two-scope contract; cyan/teal explicitly belongs to lab/internal, not public brand.
+
+**Consumers**: this PR alone is no-op for `app`, `landing`, `blog`, `pitch-deck`. To migrate a surface, set `data-upway-surface="public"` on the root element (or `data-app-mode="lab"` for the lab variant) and reference the new semantic tokens. See `research/2026-05-landing-redesign/ui-palette-conflict-pr-spec.md` in `Upway-Travel/planning` for the full migration plan.
+
+**Follow-up PRs (separate):**
+1. `UpwayWordmark` with `straight` and `slanted` variants
+2. `FlapDisplay` + `DepartureTicker` (graduate Solari from landing-v2/static-v2)
+3. `InvitePass` / `BoardingPass` (graduate from `feat/waitlist-pass`)
+4. Apply public tokens to landing/blog/deck
+5. Apply public/lab shell divergence to `app`
+
 ## [0.2.0] — 2026-05-05
 
 ### Brand migration: Sage/Forest/Sun/Coral → Ink/Bone/Volt
