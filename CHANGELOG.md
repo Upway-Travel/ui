@@ -6,6 +6,28 @@ The format is loosely based on [Keep a Changelog](https://keepachangelog.com/),
 and this project follows the rule: **breaking changes bump the minor version
 until 1.0**, and consumers must explicitly bump their pinned commit SHA.
 
+## [0.4.0] — 2026-05-16
+
+### Graduate 5 inlined editorial primitives — non-breaking, additive
+
+Pulls the article-preview, app-mockup chrome, editorial caption, route-economics row, and audit-trail footer patterns out of consumer repos (landing, blog, app) and into `@upway/ui` so future PRs import instead of duplicating. Discipline win — stops drift. All five pull color from the semantic `--color-*` tokens and font from the `--font-display` / `--font-ui` / `--font-mono` variables, so they auto-retune per public vs lab scope.
+
+**Added:**
+
+- `<FieldNoteCard>` — editorial article-preview card. Optional hero image, Fraunces title, mono `FILED N DAYS AGO · CATEGORY`, one-line snippet, optional `featured` variant with larger hero + title. Reduced-motion respected (hover lift suppressed). Props: `{ title, snippet, image?, filed, category, href, featured?, external?, className? }`.
+- `<AppMockupFrame>` — generic SVG-grade chrome frame for an app screenshot or mocked UI. macOS-style dot row + mono `UPWAY · ADVISER` caption configurable via `title`. Optional sub-caption below. Props: `{ children, title?, caption?, mono?, className?, ariaLabel? }`.
+- `<EditorialCaption>` — net new. The hung mono small-caps index + Fraunces italic title pattern used in the landing rethink Product Proof section. Optional muted body line. `sm` / `md` / `lg` sizes, `stacked` / `inline` layout. Reduced-motion respected (entrance fade suppressed). Props: `{ index?, title, body?, size?, layout?, animate?, className? }`.
+- `<RouteEconomicsRow>` — mono route + cabin + points + tax + CPP + seats inline row, with optional Volt-filled CPP badge when `cpp` is provided (Volt is money/value-only per brand contract). Optional signal-label footer (e.g. "ANA SAVER"). Props: `{ route, cabin, points, tax?, seats?, cpp?, signalLabel?, className? }`.
+- `<AuditTrailFooter>` — one-liner mono caption like `CHECKED SEATS.AERO · 4M AGO · ANA SAVER`. Brand-colored leading dot optional. Props: `{ source, freshness, kind?, prefixChecked?, showDot?, className? }`.
+
+**Consumer migration (separate PRs — `@upway/ui` first per AGENTS.md §4):**
+
+- `landing` — replace inlined `FieldNoteCardInline` in `src/pages/landing/JournalBridge.tsx` with `<FieldNoteCard>`; replace inlined chrome in `src/components/AppMockup.tsx` with `<AppMockupFrame>` (keep the conversation body local until that lands too); adopt `<EditorialCaption>` in Product Proof section.
+- `blog` — replace `FeaturedCard` + `PostCard` (in `src/components/PostCard.tsx`) with `<FieldNoteCard featured />` and `<FieldNoteCard />` respectively.
+- `app` — replace the result-card route-economics inline row with `<RouteEconomicsRow>` and the source-trail caption with `<AuditTrailFooter>` (per PR #104 / 5e). `<AppMockupFrame>` is also available if the app surfaces ever embed a self-portrait mockup.
+
+No consumers touched in this PR — discipline rule: graduate first, migrate second. After merge, downstream PRs bump their pinned `@upway/ui` SHA in `package.json`.
+
 ## [0.3.0] — 2026-05-15
 
 ### Public / lab two-scope token contract — non-breaking
