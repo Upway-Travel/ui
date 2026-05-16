@@ -6,6 +6,28 @@ The format is loosely based on [Keep a Changelog](https://keepachangelog.com/),
 and this project follows the rule: **breaking changes bump the minor version
 until 1.0**, and consumers must explicitly bump their pinned commit SHA.
 
+## [0.5.0] — 2026-05-16
+
+### Graduate 6 more inlined components — wave 2, non-breaking, additive
+
+Pulls the action-chip control (just shipped in `Upway` PR #106), the three magazine-pacing editorial cards (DataCallout, RouteCard, AdviserSnippet), and the two Field Note dossier primitives (DossierZone, AskUpway) out of consumer repos (`Upway/frontend`, `upway-blog`) and into `@upway/ui`. Same discipline as wave 1: graduate first, migrate consumers later. All six pull color from the semantic `--color-*` tokens and font from the `--font-display` / `--font-ui` / `--font-mono` variables, so they auto-retune per public vs lab scope.
+
+**Added:**
+
+- `<ActionChip>` — the adviser action-chip control. Forest primary in `public` mode, cockpit cyan primary in `lab` mode; Bone/Ink secondary with thin Ink hairline in both. Geist Sans 13.5px label, optional trailing mono fragment (e.g. "60K · 4.2¢"). Reduced-motion respected (press-scale + hover-lift suppressed). Props: `{ label, mono?, variant?, onClick?, mode?, className?, ariaLabel?, disabled? }`.
+- `<DataCallout>` — editorial magazine-pacing stat card. Mono headline stat + Fraunces caption + optional mono source footer. Used between Field Note cards on the blog homepage so the page reads as a magazine spread. Props: `{ stat, caption, source?, className? }`.
+- `<RouteCard>` — static single-route summary. Mono route + cabin small-caps + points/CPP grid + optional program footer. Sibling to `<RouteEconomicsRow>` but as an editorial paper card rather than a live result row. Props: `{ route, cabin, points, cpp?, program?, className? }`.
+- `<AdviserSnippet>` — "From the adviser" Q&A card. Italic Fraunces question (dimmed) + italic Fraunces answer (full Ink) + mono attribution footer. Props: `{ question, answer, attribution, className? }`.
+- `<DossierZone>` — generic Field Note dossier zone shell. Mono small-caps label + content area. `mono` flag switches the body to monospace (e.g. for the Availability note). Replaces the four ad-hoc zone implementations inside `Dossier.tsx` (Summary, Best for, Route math, Availability note). Props: `{ label, children, mono?, className? }`.
+- `<AskUpway>` — seeded-prompt CTA. Renders a paper card with the seeded prompt visible (Fraunces italic) + a Volt mono "Ask Upway →" button. Defaults `href` to `https://upway.travel/?ask=<encoded prompt>` when not provided. Volt is brand-locked to money/CTA moments — this is one such moment. Props: `{ prompt, href?, className? }`.
+
+**Consumer migration (separate PRs — `@upway/ui` first per AGENTS.md §4):**
+
+- `Upway/frontend` — replace `src/components/ui/ActionChip.tsx` with `<ActionChip mode={mode}>` (read mode from `useUIStore`).
+- `upway-blog` — replace `DataCalloutCard`, `RouteCard`, `AdviserSnippetCard` in `src/components/EditorialCards.tsx` with the new graduated versions. Inside `src/components/Dossier.tsx`, replace the four inlined zones with `<DossierZone>` and the inlined `AskUpway` with `<AskUpway>`.
+
+No consumers touched in this PR — discipline rule: graduate first, migrate second. After merge, downstream PRs bump their pinned `@upway/ui` SHA in `package.json`.
+
 ## [0.4.0] — 2026-05-16
 
 ### Graduate 5 inlined editorial primitives — non-breaking, additive
