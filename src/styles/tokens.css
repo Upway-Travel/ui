@@ -393,3 +393,119 @@
   --score-gradient: linear-gradient(90deg, #34d399, #2dd4bf, #fbbf24, #fb7185);
   --hero-bg:        linear-gradient(135deg, #0a0f1a 0%, #0c1a24 50%, #0a0f1a 100%);
 }
+
+/* ────────────────────────────────────────────────────────────────────────────
+   Public scope — brand-native overrides for legacy tokens
+
+   THE WHY: the legacy --bg / --surface / --text / --primary / --border tokens
+   above are defined on :root with zinc-light + cyan values. EVERY component
+   in the app references those legacy tokens (Sidebar, ChatContainer, message
+   bubbles, action chips, etc.) — so without this block, app.upway.travel
+   (public) and lab.upway.travel (lab) render identically beneath the body
+   background, because only the semantic --color-bg differs.
+
+   This block re-points the legacy tokens to brand-native cream / Forest / Ink
+   when the document is on a public surface. Components don't need to change;
+   they keep using var(--bg) etc., which now resolves to cream on public and
+   stays zinc-light on lab-light / zinc-dark on lab-dark.
+
+   Lock with locked 2026-05-15 two-scope contract above.
+   ──────────────────────────────────────────────────────────────────────── */
+[data-upway-surface="public"] {
+  /* Backgrounds — cream paper foundation */
+  --bg:       var(--upway-cream);
+  --surface:  var(--upway-bone);
+  --surface2: color-mix(in srgb, var(--upway-bone) 60%, var(--upway-cream));
+  --surface3: color-mix(in srgb, var(--upway-forest) 6%, var(--upway-bone));
+  --elevated: #ffffff;
+
+  /* Borders — Forest with low alpha for the editorial hairline language */
+  --border:        color-mix(in srgb, var(--upway-forest) 12%, transparent);
+  --border2:       color-mix(in srgb, var(--upway-forest) 18%, transparent);
+  --border-strong: color-mix(in srgb, var(--upway-forest) 28%, transparent);
+
+  /* Text hierarchy — Ink with falling alpha */
+  --text:       var(--upway-ink);
+  --text-2:     color-mix(in srgb, var(--upway-ink) 72%, transparent);
+  --text-3:     color-mix(in srgb, var(--upway-ink) 55%, transparent);
+  --text-muted: color-mix(in srgb, var(--upway-ink) 42%, transparent);
+
+  /* Primary accent — Forest, not cyan. Per locked rule: cyan never on public. */
+  --primary:        var(--upway-forest);
+  --primary-hover:  var(--upway-forest-deep);
+  --primary-pressed:var(--upway-forest-deep);
+  --primary-muted:  color-mix(in srgb, var(--upway-forest) 12%, transparent);
+  --primary-subtle: color-mix(in srgb, var(--upway-forest) 6%, transparent);
+
+  /* AI / Chat accent — Forest with sage warmth, not cyan */
+  --ai-accent:  var(--upway-forest);
+  --ai-muted:   color-mix(in srgb, var(--upway-sage) 18%, transparent);
+  --ai-subtle:  color-mix(in srgb, var(--upway-sage) 10%, transparent);
+
+  /* Glow & accent — Forest, not cyan */
+  --accent-glow:    color-mix(in srgb, var(--upway-forest) 10%, transparent);
+  --accent-subtle:  color-mix(in srgb, var(--upway-forest) 6%, transparent);
+  --accent-border:  color-mix(in srgb, var(--upway-forest) 20%, transparent);
+
+  /* Navigation — hover on cream surfaces is darker, not lighter */
+  --nav-active: color-mix(in srgb, var(--upway-forest) 8%, transparent);
+  --hover-bg:   color-mix(in srgb, var(--upway-ink) 4%, transparent);
+
+  /* Info status — Forest, not cyan */
+  --info:       var(--upway-forest);
+  --info-bg:    color-mix(in srgb, var(--upway-forest) 8%, transparent);
+
+  /* Cabin premium-economy — Forest, not cyan */
+  --cabin-premium-economy: var(--upway-forest);
+
+  /* Glass / liquid surface — cream-paper feel, not white frost */
+  --glass-bg:           color-mix(in srgb, var(--upway-bone) 80%, transparent);
+  --glass-bg-hover:     color-mix(in srgb, var(--upway-bone) 95%, transparent);
+  --glass-border:       color-mix(in srgb, var(--upway-forest) 10%, transparent);
+  --glass-border-hover: color-mix(in srgb, var(--upway-forest) 18%, transparent);
+  --glass-shadow:       0 2px 12px color-mix(in srgb, var(--upway-forest-deep) 12%, transparent),
+                        0 1px 2px color-mix(in srgb, var(--upway-forest-deep) 6%, transparent);
+  --glass-shadow-hover: 0 12px 32px color-mix(in srgb, var(--upway-forest-deep) 22%, transparent),
+                        0 4px 12px color-mix(in srgb, var(--upway-forest-deep) 10%, transparent);
+  --glass-inner-light:  inset 0 1px 0 rgba(255,255,255,0.6);
+  --glass-pill-bg:      color-mix(in srgb, var(--upway-forest) 5%, transparent);
+  --glass-pill-border:  color-mix(in srgb, var(--upway-forest) 12%, transparent);
+  --glass-pill-hover:   color-mix(in srgb, var(--upway-forest) 10%, transparent);
+
+  /* Surface variants — cream/bone instead of white */
+  --glass-bg-thin:        var(--upway-cream);
+  --glass-border-thin:    color-mix(in srgb, var(--upway-forest) 8%, transparent);
+  --glass-bg-thick:       var(--upway-bone);
+  --glass-border-thick:   color-mix(in srgb, var(--upway-forest) 14%, transparent);
+  --glass-frosted-bg:     var(--upway-bone);
+  --glass-frosted-border: color-mix(in srgb, var(--upway-forest) 10%, transparent);
+  --glass-hover-border:   color-mix(in srgb, var(--upway-forest) 16%, transparent);
+  --glass-accent-bg:      color-mix(in srgb, var(--upway-forest) 4%, transparent);
+  --glass-accent-border:  color-mix(in srgb, var(--upway-forest) 14%, transparent);
+  --hero-gradient-border: linear-gradient(135deg,
+                            color-mix(in srgb, var(--upway-forest) 20%, transparent),
+                            color-mix(in srgb, var(--upway-sage) 12%, transparent));
+
+  /* CTA gradient — Forest depth → Sage, not cyan */
+  --gradient-cta:   linear-gradient(135deg,
+                      var(--upway-forest-deep) 0%,
+                      var(--upway-forest) 50%,
+                      var(--upway-sage) 100%);
+
+  /* Hero bg — light gradient, not the dark legacy */
+  --hero-bg:        linear-gradient(135deg, var(--upway-cream) 0%, var(--upway-bone) 50%, var(--upway-cream) 100%);
+
+  /* Ambient orbs — Forest/Sage breath, not cyan */
+  --orb1: color-mix(in srgb, var(--upway-sage)        18%, transparent);
+  --orb2: color-mix(in srgb, var(--upway-forest)      10%, transparent);
+  --orb3: color-mix(in srgb, var(--upway-forest-deep) 8%,  transparent);
+  --orb4: color-mix(in srgb, var(--upway-sage)        6%,  transparent);
+
+  /* Scrollbar — bone-toned */
+  --scrollbar-thumb:        color-mix(in srgb, var(--upway-forest) 22%, transparent);
+  --scrollbar-thumb-hover:  color-mix(in srgb, var(--upway-forest) 34%, transparent);
+
+  /* Score system stays as-is (semantic green/teal/amber/red work in both
+   * scopes; cabin colors stay too). The score colors are status signals
+   * not brand color — same on cream as on zinc. */
+}
