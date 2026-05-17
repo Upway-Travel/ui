@@ -6,6 +6,37 @@ The format is loosely based on [Keep a Changelog](https://keepachangelog.com/),
 and this project follows the rule: **breaking changes bump the minor version
 until 1.0**, and consumers must explicitly bump their pinned commit SHA.
 
+## [0.6.0] — 2026-05-17
+
+### Scope legacy tokens by surface — `app.upway.travel` finally looks different from `lab.upway.travel`
+
+**The bug we shipped:** the two-scope contract (locked 2026-05-15) wired up the *semantic* tokens (`--color-bg`, `--color-text`, `--color-brand`) to flip between cream/Forest on public and zinc/cyan on lab — but **every existing component still references the *legacy* tokens** (`--bg`, `--surface`, `--text`, `--primary`, `--border`, etc.), which were defined only on `:root` with zinc-light + cyan values. So `app.upway.travel` (public) and `lab.upway.travel` (lab) rendered visually identically beneath the body background, because only the semantic `--color-bg` actually differed.
+
+**The fix:** add a `[data-upway-surface="public"]` override block at the end of `tokens.css` that re-points the legacy tokens to brand-native cream / Forest / Ink. Components don't change; they keep using `var(--bg)`, which now resolves to cream on public and stays zinc on lab.
+
+This is non-breaking — `[data-theme="dark"]` still wins for lab dark mode, and consumers without `data-upway-surface` set still see the legacy zinc-light defaults.
+
+**Re-mapped under `[data-upway-surface="public"]`:**
+
+- Backgrounds: `--bg` → cream, `--surface` → bone, `--surface2/3` → cream/bone blends
+- Borders: `--border` / `--border2` / `--border-strong` → Forest with 12/18/28% alpha
+- Text: `--text` / `--text-2` / `--text-3` / `--text-muted` → Ink with falling alpha
+- Primary: `--primary` / `--primary-hover` / `--primary-muted` → Forest (NEVER cyan on public)
+- AI accent: `--ai-accent` → Forest, `--ai-muted` → Sage
+- Glass surfaces: cream/bone with Forest hairlines, not white with black hairlines
+- Glass shadows: Forest-deep depth, not generic black
+- CTA gradient: Forest-deep → Forest → Sage, not cyan→teal
+- Hero bg: cream gradient, not dark slate
+- Ambient orbs: Sage/Forest breath, not cyan
+- Scrollbar: Forest-toned, not zinc
+- Info / cabin-premium-economy: Forest, not cyan
+
+**Untouched:** semantic tokens (already correct), score colors (status signals, scope-invariant), cabin first/business (status signals), `:root` defaults (still apply to consumers without surface attribute), `[data-theme="dark"]` lab dark overrides.
+
+**Consumer migration:**
+
+After merge, bump `@upway/ui` SHA in `Upway/frontend/package.json` and redeploy. No component code needs to change. `app.upway.travel` should immediately render cream + Forest instead of zinc + cyan.
+
 ## [0.5.0] — 2026-05-16
 
 ### Graduate 6 more inlined components — wave 2, non-breaking, additive
