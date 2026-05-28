@@ -9,7 +9,7 @@ export { default as AnimatedCounter } from './components/AnimatedCounter';
 export { default as Skeleton, SkeletonText, SkeletonCard } from './components/Skeleton';
 export { default as SlidePanel, SlidePanelHeader } from './components/SlidePanel';
 export { default as Toast, useToastStore, toast } from './components/Toast';
-export { default as UpwayLogo, UpwayMark } from './components/UpwayLogo';
+export { default as UpwayLogo, UpwayMark, UpwayIcon } from './components/UpwayLogo';
 export { default as UpwayWordmark } from './components/UpwayWordmark';
 export type { UpwayWordmarkProps, UpwayWordmarkVariant } from './components/UpwayWordmark';
 export { default as FlapDisplay } from './components/FlapDisplay';
