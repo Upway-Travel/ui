@@ -5,9 +5,10 @@
  * white), optional trailing → arrow. Canonicalized from the locked landing
  * reference (2026-05-28): this is the "Get early access →" button.
  *
- * VOLT RULE — event-only, ONE per viewport. This component *is* the event:
- * if a screen renders two VoltButtons at once, one of them is wrong. Use
- * `Button` (forest) for everything that isn't the single money/CTA moment.
+ * VOLT RULE v2 (locked 2026-07-07) — confident and frequent. Volt carries
+ * badges, underlines, CTA fills, and key numbers. Still one hue, still
+ * disciplined: never a background wash, never body text, and text on Volt
+ * is always Ink.
  *
  * Reduced-motion respected — hover-lift suppressed when
  * prefers-reduced-motion is set. Focus ring is forest, visible on cream.
@@ -59,7 +60,7 @@ export default function VoltButton({
         borderRadius: 9999,
         border: 'none',
         background: 'var(--upway-volt, #C6FF3D)',
-        color: 'var(--upway-forest-deep, #0D2E1D)',
+        color: 'var(--upway-ink, #0A0E14)',
         fontFamily: UI_FAMILY,
         fontSize: s.fontSize,
         fontWeight: 600,
