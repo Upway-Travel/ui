@@ -3,15 +3,17 @@
 /*                                                                             */
 /* Two-scope contract (locked 2026-05-15):                                     */
 /*   • public — editorial / aviation-grade. Landing, blog, deck,               */
-/*     app.upway.travel. Cream + Forest + Volt (event-only) + Ink.             */
+/*     app.upway.travel. Cream + Forest + Volt (confident) + Ink.              */
 /*   • lab    — operational cockpit. lab.upway.travel + internal diagnostics.  */
 /*     Zinc + Cyan + Gold (current dark-first system).                         */
 /*                                                                             */
 /* Opt in via [data-upway-surface="public"] or [data-upway-surface="lab"].     */
 /* `data-app-mode="lab"` also activates the lab scope automatically.           */
 /*                                                                             */
-/* Volt rule: ONE accent moment per viewport. Money/CTA/value only.            */
-/* Never decorative, never as a fill, never on borders.                        */
+/* Volt rule v2 (2026-07-07): confident and frequent — badges, underlines,     */
+/* CTA fills, key numbers. Still ONE hue, still disciplined: never a wash,     */
+/* never body text, text on Volt is always Ink. v1's one-per-viewport cap      */
+/* is retired with the bold-minimalism direction lock.                         */
 /* ─────────────────────────────────────────────────────────────────────────── */
 
 /* ── Primitive palette tokens (the colors themselves) ─────────────────── */
@@ -45,7 +47,7 @@
   --color-text:     var(--upway-ink);
   --color-brand:    var(--upway-forest);
   --color-brand-deep: var(--upway-forest-deep);
-  --color-accent:   var(--upway-volt);  /* event-only — see Volt rule above */
+  --color-accent:   var(--upway-volt);  /* confident + frequent — see Volt rule v2 */
   --color-value:    var(--upway-gold-warm);
   --font-display:   'Fraunces', 'Playfair Display', Georgia, serif;
   --font-ui:        'Geist Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
