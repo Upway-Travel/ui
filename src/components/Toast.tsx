@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { forwardRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle, AlertCircle, Info } from 'lucide-react';
 import { create } from 'zustand';
@@ -37,19 +37,25 @@ export const toast = {
 };
 
 const accentColors = {
-  success: '#22c55e',
-  error: '#ef4444',
-  info: '#06b6d4',
+  success: 'var(--upway-forest, #1A4D32)',
+  error: 'var(--upway-coral, #C76A2E)',
+  info: 'var(--upway-sage, #8FBFA0)',
 };
 
 const iconColors = {
-  success: '#22c55e',
-  error: '#ef4444',
-  info: '#06b6d4',
+  success: 'var(--upway-forest, #1A4D32)',
+  error: 'var(--upway-coral, #C76A2E)',
+  info: 'var(--upway-sage, #8FBFA0)',
 };
 
 // --- Single Toast ---
-function ToastNotification({ item, onDismiss }: { item: ToastItem; onDismiss: () => void }) {
+// forwardRef: AnimatePresence popLayout measures its children via ref —
+// a plain function component here throws the "cannot be given refs"
+// console warning on every toast.
+const ToastNotification = forwardRef<
+  HTMLDivElement,
+  { item: ToastItem; onDismiss: () => void }
+>(function ToastNotification({ item, onDismiss }, ref) {
   useEffect(() => {
     const timer = setTimeout(onDismiss, item.duration || 4000);
     return () => clearTimeout(timer);
@@ -63,6 +69,7 @@ function ToastNotification({ item, onDismiss }: { item: ToastItem; onDismiss: ()
 
   return (
     <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 16, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -8, scale: 0.97 }}
@@ -89,7 +96,7 @@ function ToastNotification({ item, onDismiss }: { item: ToastItem; onDismiss: ()
       </div>
     </motion.div>
   );
-}
+});
 
 // --- Toast Container (render once in app root) ---
 export default function ToastContainer() {

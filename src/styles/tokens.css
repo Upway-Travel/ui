@@ -25,6 +25,7 @@
   --upway-sage:         #8FBFA0;
   --upway-volt:         #C6FF3D;
   --upway-gold-warm:    #C4961A;
+  --upway-coral:        #C76A2E;  /* warm error / stops / caution — consumers already reference it */
 
   /* Lab — operational cockpit (mirrors existing zinc/cyan system) */
   --upway-zinc-50:      #fafafa;
