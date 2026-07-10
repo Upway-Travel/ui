@@ -28,7 +28,7 @@ Two scopes, opted into via `data-upway-surface` (or `data-app-mode="lab"`):
 - **Ink** `#0A0E14` — body text
 - **Forest** `#1A4D32` / **Forest-deep** `#0D2E1D` — structural depth, headings
 - **Sage** `#8FBFA0` — soft accents
-- **Volt** `#C6FF3D` — **event-only.** One accent moment per viewport. Money / CTA / value reveal. Never decorative, never as fill, never on borders.
+- **Volt** `#C6FF3D` — **confident and frequent** (rule v2, locked 2026-07-07). Badges, underlines, CTA fills, key numbers. Still one hue, still disciplined: never a background wash, never body text, and text on Volt is always Ink.
 - **Gold-warm** `#C4961A` — valuation moments only
 
 **`lab` — operational cockpit.** lab.upway.travel + internal diagnostics. Keeps the existing zinc + cyan + gold cockpit system. Cyan/teal belongs to lab/internal data contexts — NOT public brand surfaces.
@@ -43,7 +43,7 @@ Consumers reference semantic tokens (`--color-bg`, `--color-brand`, `--color-acc
 **Locked rules:**
 - Public surfaces use `data-upway-surface="public"`; lab surfaces use `data-app-mode="lab"` or `data-upway-surface="lab"`.
 - Cyan/teal NEVER appears in public brand surfaces.
-- Volt rule: max one accent per viewport.
+- Volt rule v2: confident + frequent, one hue, never a wash; text on Volt is always Ink.
 - Legacy palettes (sage/forest/sun/coral; cyan-only) stay for existing consumers as Tailwind aliases — do NOT use for new public surfaces.
 
 See `CHANGELOG.md [0.3.0]` and `src/styles/tokens.css` header for details.

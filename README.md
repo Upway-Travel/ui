@@ -13,7 +13,7 @@ If it isn't in `@upway/ui`, it isn't the brand. **Locked Design Kernel v2.0 — 
 - **3 typefaces:** Fraunces (display, italic axis) · Geist Sans (UI) · Geist Mono (data / labels)
 - **Voice:** Travel Hacker — 60% Cleo banter · 25% Mejuri restraint · 15% Liquid Death anti-establishment. Specific over vague. Concrete over abstract. Comparative over general. **Never say "AI"** — if it could be swapped for "magic", delete it.
 
-> **The Volt rule (non-negotiable):** one Volt accent per viewport, ever. Money / CTA active / value moments. Never decorative. Never on borders. Never as fill behind text. If Volt appears twice on a screen, one of them is wrong.
+> **The Volt rule v2 (locked 2026-07-07):** Volt is confident and frequent — badges, underlines, CTA fills, key numbers. One hue, disciplined: never a background wash, never body text, and text on Volt is always Ink. (v1's one-per-viewport cap was retired with the bold-minimalism direction lock.)
 
 The `lab` cyan-gold cockpit was deprecated 2026-05-27.
 

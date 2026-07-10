@@ -40,6 +40,12 @@ export { default as DossierZone } from './components/DossierZone';
 export type { DossierZoneProps } from './components/DossierZone';
 export { default as AskUpway } from './components/AskUpway';
 export type { AskUpwayProps } from './components/AskUpway';
+export { default as Eyebrow } from './components/Eyebrow';
+export type { EyebrowProps, EyebrowTone } from './components/Eyebrow';
+export { default as VoltButton } from './components/VoltButton';
+export type { VoltButtonProps } from './components/VoltButton';
+export { default as GradientCanvas } from './components/GradientCanvas';
+export type { GradientCanvasProps } from './components/GradientCanvas';
 
 // Utilities
 export { cn } from './lib/utils';
