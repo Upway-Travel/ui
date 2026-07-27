@@ -1,6 +1,12 @@
+---
+last_verified: 2026-07-27
+---
+
 # Changelog
 
 All notable changes to `@upway/ui` are documented here.
+
+> **Historical record.** Entries below describe the brand systems current at their date, including retired ones (cream/Forest/Volt, the lab cyan/gold cockpit, the two-scope contract). They are accurate history, not build guidance — the current system is Light Stage (`src/styles/light-stage.css`, locked 2026-07-24). See `~/upway-planning/UPWAY-DESIGN-DIRECTION.md` §5.2.
 
 The format is loosely based on [Keep a Changelog](https://keepachangelog.com/),
 and this project follows the rule: **breaking changes bump the minor version

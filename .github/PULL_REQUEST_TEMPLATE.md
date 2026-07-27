@@ -1,3 +1,6 @@
+<!--
+last_verified: 2026-07-27
+-->
 ## What
 <one-line summary>
 
