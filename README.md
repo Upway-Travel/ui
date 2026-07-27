@@ -1,27 +1,37 @@
+---
+last_verified: 2026-07-27
+---
+
 # `@upway/ui` — the Upway kernel
 
 > The single source of truth for the Upway brand. Tokens, type, motion, primitives, the icon. Every surface consumes this package.
 
-If it isn't in `@upway/ui`, it isn't the brand. **Locked Design Kernel v2.0 — 2026-05-27.**
+If it isn't in `@upway/ui`, it isn't the brand.
+
+> **Canon:** `~/upway-planning/UPWAY-DESIGN-DIRECTION.md` (design) · `~/upway-planning/CURRENT-STATE.md` (facts). The canon wins over this file on any conflict.
 
 ---
 
-## The contract
+## The contract — Light Stage (locked 2026-07-24, design §5.2)
 
-- **8 tokens (one theme across all surfaces):**
-  Cream `#FAF9F5` · Bone `#F4F1EA` · Ink `#0A0E14` · Forest `#1A4D32` · Forest-deep `#0D2E1D` · Sage `#8FBFA0` · **Volt `#C6FF3D`** *(EVENT-ONLY — one per viewport)* · Gold-warm `#C4961A`
-- **3 typefaces:** Fraunces (display, italic axis) · Geist Sans (UI) · Geist Mono (data / labels)
-- **Voice:** Travel Hacker — 60% Cleo banter · 25% Mejuri restraint · 15% Liquid Death anti-establishment. Specific over vague. Concrete over abstract. Comparative over general. **Never say "AI"** — if it could be swapped for "magic", delete it.
+- **Stage:** near-white `#FAFAFC` · white cells, 1px ink borders, soft lift shadows · dot-grid air · no neon, no glow.
+- **Ink:** `#12121A`.
+- **Accent:** violet `#6C3DE8` as pigment (CTAs, chips, active states). *Incumbent, not settled:* the stamp-accent decision (customs-stamp red vs departure-board amber vs violet stays) lands by 2026-08-15 per design §5.3. One-token swap; blocks nothing.
+- **Type:** Clash Display (display) · Satoshi (UI and body) · Geist Mono (data and labels only, interim face per design §5.4).
+- **Ships from** `src/styles/light-stage.css`, opt-in via `[data-upway-stage="light"]`.
+- **Scheduled for removal (design §5.2):** `.stage-grad` and the violet to plum to teal gradient text, plus the `--plum` / `--stage-teal` companions. Do not add new usages.
+- **Voice:** see design direction §13. Claim verbs: lines up, shows, checks, walks you through. Never lead with "AI". No en or em dashes in rendered copy.
 
-> **The Volt rule v2 (locked 2026-07-07):** Volt is confident and frequent — badges, underlines, CTA fills, key numbers. One hue, disciplined: never a background wash, never body text, and text on Volt is always Ink. (v1's one-per-viewport cap was retired with the bold-minimalism direction lock.)
+> **Historical note — the Volt rule v2 (locked 2026-07-07):** Volt `#C6FF3D` confident and frequent — badges, underlines, CTA fills, key numbers; never a wash; text on Volt always Ink. **Superseded 2026-07-27 on app surfaces by Light Stage.** The cream/Fraunces/Volt layer in `tokens.css` remains only while migration completes; the violet accent above is the active accent pending the 2026-08-15 decision, and the gradient utilities are scheduled for removal.
 
-The `lab` cyan-gold cockpit was deprecated 2026-05-27.
+The `lab` cyan-gold cockpit is historical (lab.upway.travel deleted 2026-05-18).
 
 ---
 
 ## What ships
 
-- **Tokens** — `src/styles/tokens.css`, also exposed via the Tailwind preset.
+- **Light Stage** — `src/styles/light-stage.css` (fonts, tokens, `.stage-*` composition utilities; opt-in scope)
+- **Tokens (legacy layer)** — `src/styles/tokens.css`, also exposed via the Tailwind preset.
 - **Brand marks** — `UpwayLogo` · `UpwayMark` · `UpwayIcon` (squircle, app-icon lockup) · `UpwayWordmark`
 - **Primitives** — `Button` · `Input` · `Select` · `Badge` · `Card` · `Skeleton` (+ `SkeletonText`, `SkeletonCard`) · `Toast` (+ `useToastStore`, `toast`) · `SlidePanel` (+ `SlidePanelHeader`)
 - **Layout / nav** — `FloatingNav`
@@ -41,7 +51,7 @@ Consumers pin a **specific commit SHA** — never `main` (CI determinism, no sur
 "@upway/ui": "github:upway-travel/ui#<sha>"
 ```
 
-Bumping the SHA in `app` / `landing` / `blog` / `pitch-deck` / `brand-guide` is a **deliberate act** after testing. The propagation pipeline:
+Bumping the SHA in `app` / `landing` / `blog` is a **deliberate act** after testing. The propagation pipeline:
 
 ```bash
 ./scripts/bump-kernel.sh <new-sha>   # opens auto-bump PRs across all consumers
@@ -55,12 +65,14 @@ Bumping the SHA in `app` / `landing` / `blog` / `pitch-deck` / `brand-guide` is 
 
 | Repo | Surface | Role |
 |---|---|---|
-| [`app`](https://github.com/Upway-Travel/app) | [app.upway.travel](https://app.upway.travel) | The chat-canonical product |
-| **`ui`** *(this repo)* | — | **The kernel** — tokens, type, primitives, the icon |
-| [`landing`](https://github.com/Upway-Travel/landing) | [upway.travel](https://upway.travel) | Marketing / waitlist |
-| [`blog`](https://github.com/Upway-Travel/blog) | [stack.upway.travel](https://stack.upway.travel) | Editorial / journal |
-| [`pitch-deck`](https://github.com/Upway-Travel/pitch-deck) | [deck.upway.travel](https://deck.upway.travel) | Investor presentation |
-| [`brand-guide`](https://github.com/Upway-Travel/brand-guide) | brand.upway.travel | Living Design Kernel v2.0 |
+| [`app`](https://github.com/Upway-Travel/app) | [app.upway.travel](https://app.upway.travel) | The agent canvas — Railway, stays on Railway |
+| **`ui`** *(this repo)* | — | **The kernel** — tokens, type, primitives, the icon. Public repo. |
+| [`landing`](https://github.com/Upway-Travel/landing) | [upway.travel](https://upway.travel) | Proof surface — Vercel (awaiting DNS flip) |
+| [`blog`](https://github.com/Upway-Travel/blog) | [stack.upway.travel](https://stack.upway.travel) | The Stack, credibility engine — Vercel (awaiting DNS flip) |
+| [`pitch-deck`](https://github.com/Upway-Travel/pitch-deck) | deck | Investor deck — Vercel; does not yet consume the kernel (rebrand pending, canon D3) |
+| [`planning`](https://github.com/Upway-Travel/planning) | — | Canon + docs |
+
+(Org total is 8 repos per CURRENT-STATE §9; `research` and `git-buddy-connect` omitted here. There is no brand-guide repo.)
 
 ---
 
@@ -76,8 +88,8 @@ Bumping the SHA in `app` / `landing` / `blog` / `pitch-deck` / `brand-guide` is 
 
 ## Brand assets
 
-- `brand-assets/` — logo PNGs, spec, marketing materials.
-- `brand-assets/icon-rework-v2.html` — locked v2.2 paper-plane mark spec sheet (scratch — not the production source).
+- `brand-assets/` — favicon.svg, logo PNGs, spec. Interim home only.
+- **Coming contract (design §5.7):** brand infrastructure ships from `@upway/ui/brand/` — one source SVG for the mark (Clash roman "upway" with the violet tail), generated favicon/icon set, per-surface OG templates, manifest base. Surfaces may not override kernel brand assets locally; `ui-consistency.yml` extends to asset hashes. Coordinate any `brand-assets/` change with that contract.
 
 ---
 

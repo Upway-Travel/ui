@@ -1,0 +1,146 @@
+/* ═══════════════════════════════════════════════════════════════════════ */
+/* LIGHT STAGE — Design Kernel v3 foundation                                */
+/* Direction locked 2026-07-24 in Kyle's typed words (see planning notes).  */
+/* Taste anchors: Fora · MindTrip · Navan Edge · 21st.dev composition.      */
+/*                                                                          */
+/* The system: near-white stage, dot-grid air, white cells with 1px ink     */
+/* borders and soft LIFT shadows, violet as pigment (NEVER glow/neon),      */
+/* gradient text violet→plum→teal, light as edges/beams/horizons — never    */
+/* corner blobs. Type: Clash Display (display) + Satoshi (UI) + Geist Mono  */
+/* (labels/data only). Fraunces and the cream/sage/forest/Volt palette are  */
+/* RETIRED on app surfaces (deck reconciliation tracked separately).        */
+/*                                                                          */
+/* Opt-in scope: [data-upway-stage="light"] on a root element. Fully        */
+/* non-breaking — nothing outside the scope changes, existing consumers     */
+/* are untouched until they adopt the attribute.                            */
+/* ═══════════════════════════════════════════════════════════════════════ */
+
+@font-face { font-family: 'Clash Display'; font-weight: 600; src: url('../../fonts/ClashDisplay-600.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Clash Display'; font-weight: 700; src: url('../../fonts/ClashDisplay-700.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Satoshi'; font-weight: 400; src: url('../../fonts/Satoshi-400.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Satoshi'; font-weight: 500; src: url('../../fonts/Satoshi-500.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: 'Satoshi'; font-weight: 700; src: url('../../fonts/Satoshi-700.woff2') format('woff2'); font-display: swap; }
+
+[data-upway-stage="light"] {
+  /* ── Stage ── */
+  --stage:      #FAFAFC;
+  --cell:       #FFFFFF;
+  --cell-2:     #F1F0F6;
+  --line:       rgba(18, 18, 26, 0.08);
+  --line-2:     rgba(18, 18, 26, 0.14);
+
+  /* ── Ink ── */
+  --ink:        #12121A;
+  --ink-mid:    rgba(18, 18, 26, 0.62);
+  --ink-dim:    rgba(18, 18, 26, 0.40);
+
+  /* ── Colour — pigment, never glow ── */
+  --violet:     #6C3DE8;   /* THE accent: CTAs, chips, active states */
+  --plum:       #A93FC9;   /* gradient companion only */
+  --stage-teal: #189E8E;   /* gradient companion + marquee data */
+
+  /* ── Elevation — soft lift, no neon anywhere ── */
+  --lift:       0 1px 2px rgba(18,18,26,0.04), 0 8px 28px -14px rgba(18,18,26,0.10);
+  --lift-hot:   0 10px 28px -10px rgba(108,61,232,0.38);
+  --lift-hover: 0 14px 36px -14px rgba(108,61,232,0.22);
+
+  /* ── Type ── */
+  --font-display: 'Clash Display', system-ui, sans-serif;
+  --font-ui:      'Satoshi', system-ui, sans-serif;
+  --font-mono:    'Geist Mono', ui-monospace, monospace;
+
+  /* Semantic remap so kernel-derived consumers inherit the stage */
+  --color-bg:      var(--stage);
+  --color-surface: var(--cell);
+  --color-text:    var(--ink);
+  --color-brand:   var(--violet);
+  --color-accent:  var(--violet);
+
+  background: var(--stage);
+  color: var(--ink);
+  font-family: var(--font-ui);
+}
+
+/* ── Air: the dot-grid ground texture ── */
+[data-upway-stage="light"] .stage-dots {
+  background-image: radial-gradient(rgba(18,18,26,0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* ── Light as edges: the horizon beam ── */
+[data-upway-stage="light"] .stage-horizon { position: relative; }
+[data-upway-stage="light"] .stage-horizon::before {
+  content: ''; position: absolute; left: 8%; right: 8%; top: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--violet) 30%, var(--stage-teal) 55%, var(--plum) 75%, transparent);
+}
+[data-upway-stage="light"] .stage-horizon::after {
+  content: ''; position: absolute; left: 0; right: 0; top: -60px; height: 200px; pointer-events: none;
+  background: radial-gradient(50% 100% at 50% 0%, rgba(108,61,232,0.09), transparent 70%);
+}
+
+/* ── The cell: every bento unit ── */
+[data-upway-stage="light"] .stage-cell {
+  background: var(--cell);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--lift);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+[data-upway-stage="light"] .stage-cell:hover {
+  border-color: rgba(108,61,232,0.45);
+  box-shadow: var(--lift), var(--lift-hover);
+}
+
+/* ── Gradient text: the only place hue meets type ── */
+[data-upway-stage="light"] .stage-grad {
+  background: linear-gradient(95deg, var(--violet) 10%, var(--plum) 45%, var(--stage-teal) 90%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ── Ghost display row: outlined type for stacked heroes ── */
+[data-upway-stage="light"] .stage-ghost {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(18,18,26,0.28);
+}
+
+/* ── Display type-as-layout helper ── */
+[data-upway-stage="light"] .stage-display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.92;
+}
+
+/* ── Mono label: eyebrows/data ONLY ── */
+[data-upway-stage="light"] .stage-label {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+/* ── The hot button: violet pigment + soft lift ── */
+[data-upway-stage="light"] .stage-btn {
+  background: var(--violet); color: #fff; border: none; cursor: pointer;
+  font-family: var(--font-ui); font-weight: 700;
+  padding: 0.9rem 1.8rem; border-radius: 12px;
+  box-shadow: var(--lift-hot);
+  transition: transform 0.15s ease;
+}
+[data-upway-stage="light"] .stage-btn:hover { transform: translateY(-1px); }
+
+/* ── Marquee: the living ticker ── */
+[data-upway-stage="light"] .stage-marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0.9rem 0; }
+[data-upway-stage="light"] .stage-marquee-inner {
+  display: flex; gap: 3.5rem; width: max-content; white-space: nowrap;
+  animation: stage-slide 30s linear infinite;
+  font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--ink-dim);
+}
+@keyframes stage-slide { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  [data-upway-stage="light"] .stage-marquee-inner { animation: none; }
+}
