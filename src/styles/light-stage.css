@@ -5,10 +5,12 @@
 /*                                                                          */
 /* The system: near-white stage, dot-grid air, white cells with 1px ink     */
 /* borders and soft LIFT shadows, violet as pigment (NEVER glow/neon),      */
-/* gradient text violet→plum→teal, light as edges/beams/horizons — never    */
-/* corner blobs. Type: Clash Display (display) + Satoshi (UI) + Geist Mono  */
-/* (labels/data only). Fraunces and the cream/sage/forest/Volt palette are  */
-/* RETIRED on app surfaces (deck reconciliation tracked separately).        */
+/* light as edges/beams/horizons — never corner blobs, never gradients      */
+/* (three-hue gradient removed per design direction v3.0 §5.2). Type:       */
+/* Clash Display (display) + Satoshi (UI) + Geist Mono (labels/data only;   */
+/* interim — Berkeley Mono is the target at the texture pass, §5.4).        */
+/* Fraunces and the cream/sage/forest/Volt palette are RETIRED on app       */
+/* surfaces (deck reconciliation tracked separately).                       */
 /*                                                                          */
 /* Opt-in scope: [data-upway-stage="light"] on a root element. Fully        */
 /* non-breaking — nothing outside the scope changes, existing consumers     */
@@ -35,9 +37,11 @@
   --ink-dim:    rgba(18, 18, 26, 0.40);
 
   /* ── Colour — pigment, never glow ── */
+  /* Violet is the INCUMBENT accent, not settled: the travel-document stamp
+     accent (customs-stamp red / departure-board amber) is under prototype,
+     decision due 2026-08-15 (design §5.3). Swap = this one token. */
   --violet:     #6C3DE8;   /* THE accent: CTAs, chips, active states */
-  --plum:       #A93FC9;   /* gradient companion only */
-  --stage-teal: #189E8E;   /* gradient companion + marquee data */
+  --stage-teal: #189E8E;   /* marquee data accents only (landing-scope) */
 
   /* ── Elevation — soft lift, no neon anywhere ── */
   --lift:       0 1px 2px rgba(18,18,26,0.04), 0 8px 28px -14px rgba(18,18,26,0.10);
@@ -71,7 +75,9 @@
 [data-upway-stage="light"] .stage-horizon { position: relative; }
 [data-upway-stage="light"] .stage-horizon::before {
   content: ''; position: absolute; left: 8%; right: 8%; top: 0; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--violet) 30%, var(--stage-teal) 55%, var(--plum) 75%, transparent);
+  /* Single-hue beam: precise light stays, the three-hue gradient does not
+     (design v3.0 §5.2). */
+  background: linear-gradient(90deg, transparent, var(--violet) 50%, transparent);
 }
 [data-upway-stage="light"] .stage-horizon::after {
   content: ''; position: absolute; left: 0; right: 0; top: -60px; height: 200px; pointer-events: none;
@@ -93,11 +99,9 @@
   box-shadow: var(--lift), var(--lift-hover);
 }
 
-/* ── Gradient text: the only place hue meets type ── */
-[data-upway-stage="light"] .stage-grad {
-  background: linear-gradient(95deg, var(--violet) 10%, var(--plum) 45%, var(--stage-teal) 90%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
+/* .stage-grad (three-hue gradient text) removed 2026-07-28 per design
+   direction v3.0 §5.2 — gradients are out of the system entirely. The
+   most recognisable generic-AI tell of the era; precise light replaces it. */
 
 /* ── Ghost display row: outlined type for stacked heroes ── */
 [data-upway-stage="light"] .stage-ghost {
@@ -132,7 +136,10 @@
 }
 [data-upway-stage="light"] .stage-btn:hover { transform: translateY(-1px); }
 
-/* ── Marquee: the living ticker ── */
+/* ── Marquee: the living ticker ──
+   Scope rule (design §12): marquee tickers are LANDING-PAGE ONLY — never
+   in or behind the app transcript. Logo marquees are dead everywhere
+   (taste + Air Canada v. Seats.aero trademark claims, §6.2). */
 [data-upway-stage="light"] .stage-marquee { overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 0.9rem 0; }
 [data-upway-stage="light"] .stage-marquee-inner {
   display: flex; gap: 3.5rem; width: max-content; white-space: nowrap;
