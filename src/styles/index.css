@@ -4,6 +4,7 @@
 @import './animations.css';
 @import './components.css';
 @import './glass.css';
+@import './light-stage.css'; /* v3 Light Stage — opt-in via [data-upway-stage="light"] */
 
 @tailwind base;
 @tailwind components;
