@@ -47,6 +47,26 @@ export type { VoltButtonProps } from './components/VoltButton';
 export { default as GradientCanvas } from './components/GradientCanvas';
 export type { GradientCanvasProps } from './components/GradientCanvas';
 
+// ── Render-contract widgets (design §4) ──
+// The agent returns structured artifacts; each widget speaks the shared
+// vocabulary and implements the four states (loading/loaded/partial/failed).
+export { default as SourceReceipt } from './components/widgets/SourceReceipt';
+export type { SourceReceiptProps } from './components/widgets/SourceReceipt';
+// Schemas are also exported from the React-free './schemas' entry point so
+// the tool-calling layer can share the contract (§4.5).
+export {
+  SourceReceiptSchema,
+  ProvenanceSourceSchema,
+  ConfidenceLevelSchema,
+  WidgetStateSchema,
+} from './schemas/sourceReceipt';
+export type {
+  SourceReceiptData,
+  ProvenanceSource,
+  ConfidenceLevel,
+  WidgetState,
+} from './schemas/sourceReceipt';
+
 // Utilities
 export { cn } from './lib/utils';
 export * from './lib/formatters';
