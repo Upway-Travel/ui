@@ -62,6 +62,8 @@ export { default as TransferPath } from './components/widgets/TransferPath';
 export type { TransferPathProps } from './components/widgets/TransferPath';
 export { default as Prompt } from './components/widgets/Prompt';
 export type { PromptProps } from './components/widgets/Prompt';
+export { default as Alert } from './components/widgets/Alert';
+export type { AlertProps } from './components/widgets/Alert';
 // Schemas are also exported from the React-free './schemas' entry point so
 // the tool-calling layer can share the contract (§4.5).
 export {
@@ -86,6 +88,8 @@ export { TransferPathSchema, TransferEndSchema } from './schemas/transferPath';
 export type { TransferPathData, TransferEnd } from './schemas/transferPath';
 export { PromptSchema, PromptChoiceSchema } from './schemas/prompt';
 export type { PromptData, PromptChoice } from './schemas/prompt';
+export { AlertSchema, AlertSeveritySchema } from './schemas/alert';
+export type { AlertData, AlertSeverity } from './schemas/alert';
 
 // Utilities
 export { cn } from './lib/utils';
