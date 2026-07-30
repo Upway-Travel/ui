@@ -70,6 +70,8 @@ export { default as Timeline } from './components/widgets/Timeline';
 export type { TimelineProps } from './components/widgets/Timeline';
 export { default as Itinerary } from './components/widgets/Itinerary';
 export type { ItineraryProps } from './components/widgets/Itinerary';
+export { default as PriceHistory } from './components/widgets/PriceHistory';
+export type { PriceHistoryProps } from './components/widgets/PriceHistory';
 // Schemas are also exported from the React-free './schemas' entry point so
 // the tool-calling layer can share the contract (§4.5).
 export {
@@ -102,6 +104,8 @@ export { TimelineSchema, TimelineStepSchema, TimelineStepStatusSchema } from './
 export type { TimelineData, TimelineStep, TimelineStepStatus } from './schemas/timeline';
 export { ItinerarySchema, ItinerarySegmentSchema, LayoverSchema } from './schemas/itinerary';
 export type { ItineraryData, ItinerarySegment, Layover } from './schemas/itinerary';
+export { PriceHistorySchema, PricePointSchema } from './schemas/priceHistory';
+export type { PriceHistoryData, PricePoint } from './schemas/priceHistory';
 
 // Utilities
 export { cn } from './lib/utils';
