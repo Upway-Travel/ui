@@ -72,6 +72,8 @@ export { default as Itinerary } from './components/widgets/Itinerary';
 export type { ItineraryProps } from './components/widgets/Itinerary';
 export { default as PriceHistory } from './components/widgets/PriceHistory';
 export type { PriceHistoryProps } from './components/widgets/PriceHistory';
+export { default as SeatMap } from './components/widgets/SeatMap';
+export type { SeatMapProps } from './components/widgets/SeatMap';
 // Schemas are also exported from the React-free './schemas' entry point so
 // the tool-calling layer can share the contract (§4.5).
 export {
@@ -106,6 +108,8 @@ export { ItinerarySchema, ItinerarySegmentSchema, LayoverSchema } from './schema
 export type { ItineraryData, ItinerarySegment, Layover } from './schemas/itinerary';
 export { PriceHistorySchema, PricePointSchema } from './schemas/priceHistory';
 export type { PriceHistoryData, PricePoint } from './schemas/priceHistory';
+export { SeatMapSchema, SeatRowSchema, SeatSchema, SeatStatusSchema, SeatQualitySchema } from './schemas/seatMap';
+export type { SeatMapData, SeatRow, Seat, SeatStatus, SeatQuality } from './schemas/seatMap';
 
 // Utilities
 export { cn } from './lib/utils';
