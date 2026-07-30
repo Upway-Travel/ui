@@ -64,6 +64,8 @@ export { default as Prompt } from './components/widgets/Prompt';
 export type { PromptProps } from './components/widgets/Prompt';
 export { default as Alert } from './components/widgets/Alert';
 export type { AlertProps } from './components/widgets/Alert';
+export { default as Confirmation } from './components/widgets/Confirmation';
+export type { ConfirmationProps } from './components/widgets/Confirmation';
 // Schemas are also exported from the React-free './schemas' entry point so
 // the tool-calling layer can share the contract (§4.5).
 export {
@@ -90,6 +92,8 @@ export { PromptSchema, PromptChoiceSchema } from './schemas/prompt';
 export type { PromptData, PromptChoice } from './schemas/prompt';
 export { AlertSchema, AlertSeveritySchema } from './schemas/alert';
 export type { AlertData, AlertSeverity } from './schemas/alert';
+export { ConfirmationSchema, ConfirmationStatusSchema } from './schemas/confirmation';
+export type { ConfirmationData, ConfirmationStatus } from './schemas/confirmation';
 
 // Utilities
 export { cn } from './lib/utils';
