@@ -53,3 +53,26 @@ export function stopsLabel(stops?: number): string | null {
   if (stops === 0) return 'Nonstop';
   return `${stops} stop${stops > 1 ? 's' : ''}`;
 }
+
+// ── Freshness decay (§6.1) — shared so every widget ages a timestamp the
+//    same way. Under 5m fresh, 5-60m ageing, over 60m stale, absent unknown.
+export type FreshnessTier = 'fresh' | 'ageing' | 'stale' | 'unknown';
+
+export function computeFreshness(verifiedAt?: string): { tier: FreshnessTier; label: string } {
+  if (!verifiedAt) return { tier: 'unknown', label: 'freshness unknown' };
+  const t = Date.parse(verifiedAt);
+  if (Number.isNaN(t)) return { tier: 'unknown', label: 'freshness unknown' };
+  const mins = (Date.now() - t) / 60000;
+  if (mins < 1) return { tier: 'fresh', label: 'verified just now' };
+  if (mins < 5) return { tier: 'fresh', label: `verified ${Math.round(mins)} min ago` };
+  if (mins < 60) return { tier: 'ageing', label: `verified ${Math.round(mins)} min ago` };
+  const hours = mins / 60;
+  if (hours < 24) return { tier: 'stale', label: `checked ${Math.round(hours)}h ago` };
+  return { tier: 'stale', label: `checked ${Math.round(hours / 24)}d ago` };
+}
+
+/** Freshness → colour. Ageing/stale get amber; paired with the text label so
+ *  status is never colour-only (§15.3). */
+export function freshnessColor(tier: FreshnessTier): string {
+  return tier === 'ageing' || tier === 'stale' ? AMBER : INK_DIM;
+}
