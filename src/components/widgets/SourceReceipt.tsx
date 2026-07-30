@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { ChevronDown, RotateCw } from 'lucide-react';
 import type { SourceReceiptData, WidgetState } from '../../schemas/sourceReceipt';
+import { computeFreshness, freshnessColor, AMBER as AGE } from './_shared';
 
 /**
  * SourceReceipt — the signature provenance element (design §5.6, §6).
@@ -27,29 +28,6 @@ const INK_MID = 'var(--ink-mid, rgba(18,18,26,0.62))';
 const INK_DIM = 'var(--ink-dim, rgba(18,18,26,0.40))';
 const LINE = 'var(--line, rgba(18,18,26,0.14))';
 const ACCENT = 'var(--color-brand, var(--violet, #6C3DE8))';
-// Departure-board amber for ageing/stale freshness. Semantic status colour,
-// deliberately NOT the brand accent (§11) — paired with a text label so the
-// signal is never colour-only (§15.3).
-const AGE = '#B26B00';
-
-type FreshnessTier = 'fresh' | 'ageing' | 'stale' | 'unknown';
-
-function computeFreshness(verifiedAt?: string): { tier: FreshnessTier; label: string } {
-  if (!verifiedAt) return { tier: 'unknown', label: 'freshness unknown' };
-  const t = Date.parse(verifiedAt);
-  if (Number.isNaN(t)) return { tier: 'unknown', label: 'freshness unknown' };
-  const mins = (Date.now() - t) / 60000;
-  if (mins < 1) return { tier: 'fresh', label: 'verified just now' };
-  if (mins < 5) return { tier: 'fresh', label: `verified ${Math.round(mins)} min ago` };
-  if (mins < 60) return { tier: 'ageing', label: `verified ${Math.round(mins)} min ago` };
-  const hours = mins / 60;
-  if (hours < 24) return { tier: 'stale', label: `checked ${Math.round(hours)}h ago` };
-  return { tier: 'stale', label: `checked ${Math.round(hours / 24)}d ago` };
-}
-
-function freshnessColor(tier: FreshnessTier): string {
-  return tier === 'ageing' || tier === 'stale' ? AGE : INK_DIM;
-}
 
 export interface SourceReceiptProps {
   /** Validated receipt data. Required for loaded/partial; ignored for loading/failed. */
