@@ -54,6 +54,8 @@ export { default as SourceReceipt } from './components/widgets/SourceReceipt';
 export type { SourceReceiptProps } from './components/widgets/SourceReceipt';
 export { default as Option } from './components/widgets/Option';
 export type { OptionProps } from './components/widgets/Option';
+export { default as Comparison } from './components/widgets/Comparison';
+export type { ComparisonProps } from './components/widgets/Comparison';
 // Schemas are also exported from the React-free './schemas' entry point so
 // the tool-calling layer can share the contract (§4.5).
 export {
@@ -70,6 +72,8 @@ export type {
 } from './schemas/sourceReceipt';
 export { OptionSchema, PointsPriceSchema, OptionSegmentSchema, CabinSchema, MoneySchema } from './schemas/option';
 export type { OptionData, PointsPrice, OptionSegment, Cabin, Money } from './schemas/option';
+export { ComparisonSchema } from './schemas/comparison';
+export type { ComparisonData } from './schemas/comparison';
 
 // Utilities
 export { cn } from './lib/utils';
