@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { ChevronDown, Plane } from 'lucide-react';
-import { formatPoints, formatDuration } from '../../lib/formatters';
-import type { OptionData, Cabin } from '../../schemas/option';
+import { formatPoints } from '../../lib/formatters';
+import type { OptionData } from '../../schemas/option';
 import type { WidgetState } from '../../schemas/sourceReceipt';
 import SourceReceipt from './SourceReceipt';
+import {
+  MONO, DISPLAY, UI, INK, INK_MID, INK_DIM, LINE, CELL, ACCENT, LIFT, LIFT_HOT,
+  CABIN_LABEL, formatCash, safeDuration, stopsLabel,
+} from './_shared';
 
 /**
  * Option — a single bookable choice (design §4.2), the render contract's
@@ -19,40 +23,6 @@ import SourceReceipt from './SourceReceipt';
  * CTA, everything else quiet; sentence case, no dashes, claim verbs (§13).
  * Four states (§4.3): loading / loaded / partial / failed.
  */
-
-const MONO = 'var(--font-mono, "Geist Mono", ui-monospace, monospace)';
-const DISPLAY = 'var(--font-display, "Clash Display", system-ui, sans-serif)';
-const UI = 'var(--font-ui, "Satoshi", system-ui, sans-serif)';
-const INK = 'var(--ink, var(--text, #12121A))';
-const INK_MID = 'var(--ink-mid, rgba(18,18,26,0.62))';
-const INK_DIM = 'var(--ink-dim, rgba(18,18,26,0.40))';
-const LINE = 'var(--line, rgba(18,18,26,0.08))';
-const CELL = 'var(--cell, var(--surface, #FFFFFF))';
-const ACCENT = 'var(--color-brand, var(--violet, #6C3DE8))';
-const LIFT = 'var(--lift, 0 1px 2px rgba(18,18,26,0.04), 0 8px 28px -14px rgba(18,18,26,0.10))';
-
-const CABIN_LABEL: Record<Cabin, string> = {
-  economy: 'Economy',
-  premium_economy: 'Premium economy',
-  business: 'Business',
-  first: 'First',
-};
-
-function formatCash(amount: number, currency = 'USD'): string {
-  const symbol = currency === 'USD' ? '$' : currency === 'GBP' ? '£' : currency === 'EUR' ? '€' : '';
-  const digits = amount < 1000 ? 2 : 0;
-  const n = amount.toLocaleString('en-US', { minimumFractionDigits: digits, maximumFractionDigits: digits });
-  return symbol ? `${symbol}${n}` : `${n} ${currency}`;
-}
-
-function safeDuration(iso?: string): string | null {
-  if (!iso) return null;
-  try {
-    return formatDuration(iso);
-  } catch {
-    return null;
-  }
-}
 
 export interface OptionProps {
   data?: OptionData;
@@ -85,11 +55,7 @@ const cellStyle: React.CSSProperties = {
 
 function RouteEyebrow({ data }: { data: OptionData }) {
   const dur = safeDuration(data.duration);
-  const bits = [
-    data.cabin ? CABIN_LABEL[data.cabin] : null,
-    dur,
-    data.stops === 0 ? 'Nonstop' : data.stops ? `${data.stops} stop${data.stops > 1 ? 's' : ''}` : null,
-  ].filter(Boolean);
+  const bits = [data.cabin ? CABIN_LABEL[data.cabin] : null, dur, stopsLabel(data.stops)].filter(Boolean);
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
       <span
