@@ -60,6 +60,8 @@ export { default as BalanceLedger } from './components/widgets/BalanceLedger';
 export type { BalanceLedgerProps } from './components/widgets/BalanceLedger';
 export { default as TransferPath } from './components/widgets/TransferPath';
 export type { TransferPathProps } from './components/widgets/TransferPath';
+export { default as Prompt } from './components/widgets/Prompt';
+export type { PromptProps } from './components/widgets/Prompt';
 // Schemas are also exported from the React-free './schemas' entry point so
 // the tool-calling layer can share the contract (§4.5).
 export {
@@ -82,6 +84,8 @@ export { BalanceLedgerSchema, LedgerEntrySchema, ValueRangeSchema, BalanceSource
 export type { BalanceLedgerData, LedgerEntry, ValueRange, BalanceSource, BalanceKind } from './schemas/balanceLedger';
 export { TransferPathSchema, TransferEndSchema } from './schemas/transferPath';
 export type { TransferPathData, TransferEnd } from './schemas/transferPath';
+export { PromptSchema, PromptChoiceSchema } from './schemas/prompt';
+export type { PromptData, PromptChoice } from './schemas/prompt';
 
 // Utilities
 export { cn } from './lib/utils';
