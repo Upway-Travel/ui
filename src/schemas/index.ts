@@ -7,3 +7,4 @@
  */
 
 export * from './sourceReceipt';
+export * from './option';
