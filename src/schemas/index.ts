@@ -15,3 +15,4 @@ export * from './prompt';
 export * from './alert';
 export * from './confirmation';
 export * from './timeline';
+export * from './itinerary';
