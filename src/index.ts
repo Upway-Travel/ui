@@ -58,6 +58,8 @@ export { default as Comparison } from './components/widgets/Comparison';
 export type { ComparisonProps } from './components/widgets/Comparison';
 export { default as BalanceLedger } from './components/widgets/BalanceLedger';
 export type { BalanceLedgerProps } from './components/widgets/BalanceLedger';
+export { default as TransferPath } from './components/widgets/TransferPath';
+export type { TransferPathProps } from './components/widgets/TransferPath';
 // Schemas are also exported from the React-free './schemas' entry point so
 // the tool-calling layer can share the contract (§4.5).
 export {
@@ -78,6 +80,8 @@ export { ComparisonSchema } from './schemas/comparison';
 export type { ComparisonData } from './schemas/comparison';
 export { BalanceLedgerSchema, LedgerEntrySchema, ValueRangeSchema, BalanceSourceSchema, BalanceKindSchema } from './schemas/balanceLedger';
 export type { BalanceLedgerData, LedgerEntry, ValueRange, BalanceSource, BalanceKind } from './schemas/balanceLedger';
+export { TransferPathSchema, TransferEndSchema } from './schemas/transferPath';
+export type { TransferPathData, TransferEnd } from './schemas/transferPath';
 
 // Utilities
 export { cn } from './lib/utils';
