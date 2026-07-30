@@ -17,3 +17,4 @@ export * from './confirmation';
 export * from './timeline';
 export * from './itinerary';
 export * from './priceHistory';
+export * from './seatMap';
