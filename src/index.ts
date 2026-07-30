@@ -68,6 +68,8 @@ export { default as Confirmation } from './components/widgets/Confirmation';
 export type { ConfirmationProps } from './components/widgets/Confirmation';
 export { default as Timeline } from './components/widgets/Timeline';
 export type { TimelineProps } from './components/widgets/Timeline';
+export { default as Itinerary } from './components/widgets/Itinerary';
+export type { ItineraryProps } from './components/widgets/Itinerary';
 // Schemas are also exported from the React-free './schemas' entry point so
 // the tool-calling layer can share the contract (§4.5).
 export {
@@ -98,6 +100,8 @@ export { ConfirmationSchema, ConfirmationStatusSchema } from './schemas/confirma
 export type { ConfirmationData, ConfirmationStatus } from './schemas/confirmation';
 export { TimelineSchema, TimelineStepSchema, TimelineStepStatusSchema } from './schemas/timeline';
 export type { TimelineData, TimelineStep, TimelineStepStatus } from './schemas/timeline';
+export { ItinerarySchema, ItinerarySegmentSchema, LayoverSchema } from './schemas/itinerary';
+export type { ItineraryData, ItinerarySegment, Layover } from './schemas/itinerary';
 
 // Utilities
 export { cn } from './lib/utils';
