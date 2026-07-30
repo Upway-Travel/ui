@@ -52,6 +52,8 @@ export type { GradientCanvasProps } from './components/GradientCanvas';
 // vocabulary and implements the four states (loading/loaded/partial/failed).
 export { default as SourceReceipt } from './components/widgets/SourceReceipt';
 export type { SourceReceiptProps } from './components/widgets/SourceReceipt';
+export { default as Option } from './components/widgets/Option';
+export type { OptionProps } from './components/widgets/Option';
 // Schemas are also exported from the React-free './schemas' entry point so
 // the tool-calling layer can share the contract (§4.5).
 export {
@@ -66,6 +68,8 @@ export type {
   ConfidenceLevel,
   WidgetState,
 } from './schemas/sourceReceipt';
+export { OptionSchema, PointsPriceSchema, OptionSegmentSchema, CabinSchema, MoneySchema } from './schemas/option';
+export type { OptionData, PointsPrice, OptionSegment, Cabin, Money } from './schemas/option';
 
 // Utilities
 export { cn } from './lib/utils';
