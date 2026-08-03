@@ -6,6 +6,25 @@ The format is loosely based on [Keep a Changelog](https://keepachangelog.com/),
 and this project follows the rule: **breaking changes bump the minor version
 until 1.0**, and consumers must explicitly bump their pinned commit SHA.
 
+## [0.7.0] — 2026-08-03
+
+### Light Stage becomes the default; legacy palettes quarantined behind explicit stage opt-in
+
+**The problem:** `tokens.css` still shipped the retired brands as unscoped `:root` defaults — the cream/Forest/Volt/Fraunces "public" palette AND the zinc/cyan/gold "lab" palette. Fraunces was the default `--font-display` and cyan the default `--primary` unless a consumer opted into `[data-upway-stage="light"]`. Any new or unconfigured consumer silently inherited a retired brand.
+
+**The fix (scoping beats deleting for one release):**
+
+- **`:root` defaults are now Light Stage** (Design Kernel v3, locked 2026-07-24): semantic tokens (`--color-*`, `--font-*`) and the brand-bearing legacy tokens (`--primary`, `--ai-accent`, `--accent-*`, `--info`, `--nav-active`, `--gradient-cta`, `--hero-bg`, orbs, glass accents) resolve to stage/ink/violet with Clash Display + Satoshi + Geist Mono. Values mirror `light-stage.css`.
+- **`[data-upway-stage="light"]` is unchanged** and resolves to identical values — consumers already on Light Stage see zero visual diff.
+- **classic stage (opt-in only):** cream/Forest/Volt/Fraunces primitives + semantics + the legacy re-map now live under `[data-upway-stage="classic"]`, with `[data-upway-surface="public"]` kept as a legacy alias. Pinned consumers that set the attribute are unchanged.
+- **lab stage (opt-in only):** zinc/cyan/gold primitives + semantics live under `[data-upway-stage="lab"]`, with `[data-upway-surface="lab"]` / `[data-app-mode="lab"]` kept as legacy aliases. The scope re-asserts the cockpit values for the brand-bearing legacy tokens, so lab-light and lab-dark are unchanged.
+- **Neutral structural tokens** (grays, shadows, score/status colors, glass neutrals, aliases) stay global so components keep rendering everywhere.
+- **`tailwind-preset.js`:** same treatment — semantic classes fall back to Light Stage values; legacy color names (`brand-cream`, `brand-bone`, `brand-ink`, `brand-forest`, `brand-volt`, `gold`, `serif`) are kept with literal fallbacks so existing class usage in pinned consumers keeps rendering.
+
+**Deprecation:** the classic and lab stages are scheduled for deletion once landing and blog complete their kernel bump. Do not build new surfaces on them.
+
+**Consumer migration:** nothing changes until a consumer bumps its pinned SHA. Surfaces that want the retired look after bumping must set `data-upway-stage="classic"` (or keep `data-upway-surface="public"`). Unconfigured consumers now get Light Stage.
+
 ## [0.6.0] — 2026-05-17
 
 ### Scope legacy tokens by surface — `app.upway.travel` finally looks different from `lab.upway.travel`

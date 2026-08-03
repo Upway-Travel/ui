@@ -1,75 +1,30 @@
 /* ─────────────────────────────────────────────────────────────────────────── */
 /* Upway Design Tokens 2026                                                    */
 /*                                                                             */
-/* Two-scope contract (locked 2026-05-15):                                     */
-/*   • public — editorial / aviation-grade. Landing, blog, deck,               */
-/*     app.upway.travel. Cream + Forest + Volt (confident) + Ink.              */
-/*   • lab    — operational cockpit. lab.upway.travel + internal diagnostics.  */
-/*     Zinc + Cyan + Gold (current dark-first system).                         */
+/* Stage contract (updated 2026-08-03):                                        */
+/*   • DEFAULT (:root) — Light Stage (Design Kernel v3, locked 2026-07-24).    */
+/*     Near-white stage, ink text, violet pigment, Clash Display + Satoshi.    */
+/*     An unconfigured consumer gets Light Stage. [data-upway-stage="light"]   */
+/*     remains a supported explicit opt-in and resolves to the same values     */
+/*     (see light-stage.css — keep the two in sync).                           */
+/*   • classic — retired editorial brand (cream + Forest + Volt + Fraunces).   */
+/*     Opt-in only: [data-upway-stage="classic"], or the legacy alias          */
+/*     [data-upway-surface="public"].                                          */
+/*   • lab — retired operational cockpit (zinc + cyan + gold). Opt-in only:    */
+/*     [data-upway-stage="lab"], or legacy aliases [data-upway-surface="lab"]  */
+/*     / [data-app-mode="lab"].                                                */
 /*                                                                             */
-/* Opt in via [data-upway-surface="public"] or [data-upway-surface="lab"].     */
-/* `data-app-mode="lab"` also activates the lab scope automatically.           */
-/*                                                                             */
-/* Volt rule v2 (2026-07-07): confident and frequent — badges, underlines,     */
-/* CTA fills, key numbers. Still ONE hue, still disciplined: never a wash,     */
-/* never body text, text on Volt is always Ink. v1's one-per-viewport cap      */
-/* is retired with the bold-minimalism direction lock.                         */
+/* DEPRECATION: the classic and lab stages are scheduled for deletion once     */
+/* landing and blog complete their kernel bump. Do not build new surfaces on   */
+/* them. Nothing in :root may reference the retired palettes.                  */
 /* ─────────────────────────────────────────────────────────────────────────── */
 
-/* ── Primitive palette tokens (the colors themselves) ─────────────────── */
-:root {
-  /* Public — editorial / aviation-grade */
-  --upway-cream:        #FAF9F5;
-  --upway-bone:         #F4F1EA;
-  --upway-ink:          #0A0E14;
-  --upway-forest:       #1A4D32;
-  --upway-forest-deep:  #0D2E1D;
-  --upway-sage:         #8FBFA0;
-  --upway-volt:         #C6FF3D;
-  --upway-gold-warm:    #C4961A;
-  --upway-coral:        #C76A2E;  /* warm error / stops / caution — consumers already reference it */
-
-  /* Lab — operational cockpit (mirrors existing zinc/cyan system) */
-  --upway-zinc-50:      #fafafa;
-  --upway-zinc-100:     #f4f4f5;
-  --upway-zinc-900:     #18181b;
-  --upway-zinc-950:     #09090b;
-  --upway-cyan-400:     #22d3ee;
-  --upway-cyan-600:     #0891b2;
-  --upway-gold-400:     #d4a828;
-}
-
-/* ── Semantic scopes — consumers reference these, not primitives ──────── */
-:root,
-[data-upway-surface="public"] {
-  --color-bg:       var(--upway-cream);
-  --color-surface:  var(--upway-bone);
-  --color-text:     var(--upway-ink);
-  --color-brand:    var(--upway-forest);
-  --color-brand-deep: var(--upway-forest-deep);
-  --color-accent:   var(--upway-volt);  /* confident + frequent — see Volt rule v2 */
-  --color-value:    var(--upway-gold-warm);
-  --font-display:   'Fraunces', 'Playfair Display', Georgia, serif;
-  --font-ui:        'Geist Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-mono:      'Söhne Mono', 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
-}
-
-[data-upway-surface="lab"],
-[data-app-mode="lab"] {
-  --color-bg:       var(--upway-zinc-950);
-  --color-surface:  var(--upway-zinc-900);
-  --color-text:     var(--upway-zinc-50);
-  --color-brand:    var(--upway-cyan-400);
-  --color-brand-deep: var(--upway-cyan-600);
-  --color-accent:   var(--upway-gold-400);
-  --color-value:    var(--upway-gold-400);
-  /* Fonts are shared across scopes; lab inherits public font stack. */
-}
-
-/* ── Legacy tokens below — preserved for existing consumers ───────────── */
-/* These remain unchanged to avoid breaking the current app/landing/blog.   */
-/* New surfaces should reference the semantic --color-* tokens above and    */
-/* set data-upway-surface on a root element.                                */
+/* ── Legacy structural tokens — preserved for existing consumers ───────── */
+/* Neutral values (grays, shadows, score/status colors, glass, aliases) stay  */
+/* global so components keep rendering everywhere. Brand-bearing values       */
+/* (cyan primary/ai/accent/info, dark hero) are re-pointed to Light Stage in  */
+/* the :root block further down, and re-asserted verbatim inside the lab and  */
+/* classic scopes so opted-in consumers are unchanged.                        */
 
 /* ── Light Mode Defaults (cool zinc — legacy) ─────────────────────────── */
 :root {
@@ -234,7 +189,141 @@
   --hero-bg:        linear-gradient(135deg, #0f172a 0%, #0c1a24 50%, #0f172a 100%);
 }
 
-/* ── Dark Mode (zinc-950 base, dark-first) ────────────────────────────── */
+/* ── DEFAULT: Light Stage (Design Kernel v3) ──────────────────────────── */
+/* Values mirror light-stage.css [data-upway-stage="light"] — keep in sync. */
+/* This block deliberately comes AFTER the legacy structural block so that   */
+/* at :root the brand-bearing legacy tokens re-resolve to Light Stage and    */
+/* an unconfigured consumer never inherits retired cyan or Fraunces.         */
+/* Cascade order contract for this file:                                     */
+/*   legacy structural → :root Light Stage → lab scope → dark → classic.     */
+:root {
+  /* Semantic tokens — what consumers should reference */
+  --color-bg:         #FAFAFC;
+  --color-surface:    #FFFFFF;
+  --color-text:       #12121A;
+  --color-brand:      #6C3DE8;
+  --color-brand-deep: color-mix(in srgb, #6C3DE8 78%, #12121A);
+  --color-accent:     #6C3DE8;  /* one-accent system: violet is THE accent */
+  --color-value:      #6C3DE8;  /* value moments use the accent; gold is retired */
+  --font-display:     'Clash Display', system-ui, sans-serif;
+  --font-ui:          'Satoshi', system-ui, sans-serif;
+  --font-mono:        'Geist Mono', ui-monospace, monospace;
+
+  /* Brand-bearing legacy tokens → Light Stage (retired cyan quarantined) */
+  --bg:       #FAFAFC;
+  --surface:  #FFFFFF;
+  --surface2: #F1F0F6;
+  --surface3: #F1F0F6;
+  --elevated: #FFFFFF;
+  --border:        rgba(18, 18, 26, 0.08);
+  --border2:       rgba(18, 18, 26, 0.14);
+  --border-strong: rgba(18, 18, 26, 0.22);
+  --text:       #12121A;
+  --text-2:     rgba(18, 18, 26, 0.62);
+  --text-3:     rgba(18, 18, 26, 0.48);
+  --text-muted: rgba(18, 18, 26, 0.40);
+  --primary:         #6C3DE8;
+  --primary-hover:   color-mix(in srgb, #6C3DE8 85%, #12121A);
+  --primary-pressed: color-mix(in srgb, #6C3DE8 72%, #12121A);
+  --primary-muted:   rgba(108, 61, 232, 0.12);
+  --primary-subtle:  rgba(108, 61, 232, 0.06);
+  --ai-accent: #6C3DE8;
+  --ai-muted:  rgba(108, 61, 232, 0.12);
+  --ai-subtle: rgba(108, 61, 232, 0.06);
+  --accent-glow:   rgba(108, 61, 232, 0.10);
+  --accent-subtle: rgba(108, 61, 232, 0.06);
+  --accent-border: rgba(108, 61, 232, 0.20);
+  --nav-active: rgba(108, 61, 232, 0.08);
+  --hover-bg:   rgba(18, 18, 26, 0.04);
+  --info:    #6C3DE8;
+  --info-bg: rgba(108, 61, 232, 0.08);
+  --cabin-premium-economy: #6C3DE8;
+  --neon-purple: #6C3DE8;
+  --glass-accent-bg:     rgba(108, 61, 232, 0.04);
+  --glass-accent-border: rgba(108, 61, 232, 0.12);
+  --hero-gradient-border: linear-gradient(135deg, rgba(108, 61, 232, 0.20), rgba(108, 61, 232, 0.08));
+  /* Flat violet — gradients are out of the system (design v3.0 §5.2) */
+  --gradient-cta: linear-gradient(0deg, #6C3DE8, #6C3DE8);
+  --hero-bg:      #FAFAFC;
+  --orb1: rgba(108, 61, 232, 0.03);
+  --orb2: rgba(108, 61, 232, 0.02);
+  --orb3: rgba(108, 61, 232, 0.02);
+  --orb4: rgba(108, 61, 232, 0.01);
+}
+
+/* ── lab stage — retired operational cockpit. OPT-IN ONLY ─────────────── */
+/* Scheduled for deletion once landing/blog complete their kernel bump.     */
+[data-upway-stage="lab"],
+[data-upway-surface="lab"],
+[data-app-mode="lab"] {
+  /* Primitives (quarantined out of :root 2026-08-03) */
+  --upway-zinc-50:  #fafafa;
+  --upway-zinc-100: #f4f4f5;
+  --upway-zinc-900: #18181b;
+  --upway-zinc-950: #09090b;
+  --upway-cyan-400: #22d3ee;
+  --upway-cyan-600: #0891b2;
+  --upway-gold-400: #d4a828;
+
+  /* Semantic scope (unchanged from the two-scope contract) */
+  --color-bg:         var(--upway-zinc-950);
+  --color-surface:    var(--upway-zinc-900);
+  --color-text:       var(--upway-zinc-50);
+  --color-brand:      var(--upway-cyan-400);
+  --color-brand-deep: var(--upway-cyan-600);
+  --color-accent:     var(--upway-gold-400);
+  --color-value:      var(--upway-gold-400);
+  --font-display: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --font-ui:      'Geist Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono:    'Söhne Mono', 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Re-assert cockpit values for the brand-bearing legacy tokens that      */
+  /* :root now points at Light Stage. Values are verbatim from the legacy   */
+  /* zinc-light base block above — lab-light consumers are unchanged.       */
+  --bg:       #fafafa;
+  --surface:  #ffffff;
+  --surface2: #f4f4f5;
+  --surface3: #e4e4e7;
+  --elevated: #ffffff;
+  --border:        rgba(0, 0, 0, 0.10);
+  --border2:       rgba(0, 0, 0, 0.14);
+  --border-strong: rgba(0, 0, 0, 0.22);
+  --text:       #18181b;
+  --text-2:     #52525b;
+  --text-3:     #71717a;
+  --text-muted: #a1a1aa;
+  --primary:         #0891b2;
+  --primary-hover:   #0e7490;
+  --primary-pressed: #155e75;
+  --primary-muted:   rgba(8, 145, 178, 0.12);
+  --primary-subtle:  rgba(8, 145, 178, 0.06);
+  --ai-accent: #06b6d4;
+  --ai-muted:  rgba(6, 182, 212, 0.12);
+  --ai-subtle: rgba(6, 182, 212, 0.06);
+  --accent-glow:   rgba(8, 145, 178, 0.10);
+  --accent-subtle: rgba(8, 145, 178, 0.06);
+  --accent-border: rgba(8, 145, 178, 0.20);
+  --nav-active: rgba(8, 145, 178, 0.08);
+  --hover-bg:   rgba(0, 0, 0, 0.04);
+  --info:    #0891b2;
+  --info-bg: rgba(8, 145, 178, 0.08);
+  --cabin-premium-economy: #0891b2;
+  --neon-purple: #06b6d4;
+  --glass-accent-bg:     rgba(8, 145, 178, 0.04);
+  --glass-accent-border: rgba(8, 145, 178, 0.12);
+  --hero-gradient-border: linear-gradient(135deg, rgba(8, 145, 178, 0.2), rgba(6, 182, 212, 0.08));
+  --gradient-cta: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #22d3ee 100%);
+  --hero-bg:      linear-gradient(135deg, #0f172a 0%, #0c1a24 50%, #0f172a 100%);
+  --orb1: rgba(6, 182, 212, 0.03);
+  --orb2: rgba(8, 145, 178, 0.02);
+  --orb3: rgba(13, 148, 136, 0.02);
+  --orb4: rgba(14, 165, 233, 0.01);
+}
+
+/* ── Dark Mode (zinc-950 base, dark-first) — lab-era, retired ─────────── */
+/* Kept verbatim for existing dark-mode consumers; scheduled for deletion   */
+/* with the legacy stages. Placed after the lab scope so lab + dark on the  */
+/* same element still resolves to the cockpit dark values, as before.       */
 [data-theme="dark"] {
   /* Backgrounds — zinc scale */
   --bg:       #09090b;
@@ -398,23 +487,49 @@
 }
 
 /* ────────────────────────────────────────────────────────────────────────────
-   Public scope — brand-native overrides for legacy tokens
+   classic stage — retired editorial brand. OPT-IN ONLY.
+   Scheduled for deletion once landing/blog complete their kernel bump.
 
-   THE WHY: the legacy --bg / --surface / --text / --primary / --border tokens
-   above are defined on :root with zinc-light + cyan values. EVERY component
-   in the app references those legacy tokens (Sidebar, ChatContainer, message
-   bubbles, action chips, etc.) — so without this block, app.upway.travel
-   (public) and lab.upway.travel (lab) render identically beneath the body
-   background, because only the semantic --color-bg differs.
+   Formerly the "public" scope of the 2026-05-15 two-scope contract.
+   [data-upway-surface="public"] is kept as a legacy alias so pinned
+   consumers are unchanged when they bump; new opt-ins (there should be
+   none) use [data-upway-stage="classic"].
 
-   This block re-points the legacy tokens to brand-native cream / Forest / Ink
-   when the document is on a public surface. Components don't need to change;
-   they keep using var(--bg) etc., which now resolves to cream on public and
-   stays zinc-light on lab-light / zinc-dark on lab-dark.
+   Volt rule v2 (2026-07-07, classic scope only): confident and frequent —
+   badges, underlines, CTA fills, key numbers. One hue, never a wash, never
+   body text; text on Volt is always Ink.
 
-   Lock with locked 2026-05-15 two-scope contract above.
+   THE WHY (historical): the legacy --bg / --surface / --text / --primary /
+   --border tokens above were :root zinc-light + cyan values, and every app
+   component references them. This block re-points them to brand-native
+   cream / Forest / Ink for the classic scope; components keep using
+   var(--bg) etc. unchanged.
    ──────────────────────────────────────────────────────────────────────── */
+[data-upway-stage="classic"],
 [data-upway-surface="public"] {
+  /* Primitives (quarantined out of :root 2026-08-03) */
+  --upway-cream:       #FAF9F5;
+  --upway-bone:        #F4F1EA;
+  --upway-ink:         #0A0E14;
+  --upway-forest:      #1A4D32;
+  --upway-forest-deep: #0D2E1D;
+  --upway-sage:        #8FBFA0;
+  --upway-volt:        #C6FF3D;
+  --upway-gold-warm:   #C4961A;
+  --upway-coral:       #C76A2E;  /* warm error / stops / caution */
+
+  /* Semantic scope */
+  --color-bg:         var(--upway-cream);
+  --color-surface:    var(--upway-bone);
+  --color-text:       var(--upway-ink);
+  --color-brand:      var(--upway-forest);
+  --color-brand-deep: var(--upway-forest-deep);
+  --color-accent:     var(--upway-volt);  /* see Volt rule v2 above */
+  --color-value:      var(--upway-gold-warm);
+  --font-display: 'Fraunces', 'Playfair Display', Georgia, serif;
+  --font-ui:      'Geist Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-mono:    'Söhne Mono', 'Geist Mono', 'JetBrains Mono', ui-monospace, monospace;
+
   /* Backgrounds — cream paper foundation */
   --bg:       var(--upway-cream);
   --surface:  var(--upway-bone);
