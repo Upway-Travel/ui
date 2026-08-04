@@ -15,6 +15,12 @@
 /* Opt-in scope: [data-upway-stage="light"] on a root element. Fully        */
 /* non-breaking — nothing outside the scope changes, existing consumers     */
 /* are untouched until they adopt the attribute.                            */
+/*                                                                          */
+/* 2026-08-03: Light Stage is now ALSO the :root default — tokens.css       */
+/* mirrors the semantic values in this scope (keep the two in sync). The    */
+/* attribute remains supported and resolves identically. The retired        */
+/* classic/lab palettes are opt-in only and are scheduled for deletion      */
+/* once landing/blog complete their kernel bump.                            */
 /* ═══════════════════════════════════════════════════════════════════════ */
 
 @font-face { font-family: 'Clash Display'; font-weight: 600; src: url('../../fonts/ClashDisplay-600.woff2') format('woff2'); font-display: swap; }
